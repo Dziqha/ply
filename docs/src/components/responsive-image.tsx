@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface ResponsiveImageProps {
@@ -25,11 +26,11 @@ export function ResponsiveImage({
 
   // Fallback ke light mode saat loading
   if (!mounted) {
-    return <img src={lightSrc} alt={alt} className={className} />;
+    return <Image src={lightSrc} alt={alt} className={className} />;
   }
 
   return (
-    <img
+    <Image
       src={resolvedTheme === "dark" ? darkSrc : lightSrc}
       alt={alt}
       className={className}
