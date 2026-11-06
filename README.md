@@ -26,7 +26,7 @@
 - Extensible and clean internal architecture
 - Optional middleware: Auth, Logger, Recovery
 - Test helpers: `app.Test(req)` runs requests in-process, no port needed
-- CLI generator: `npx create-ply` for instant project scaffolding
+- CLI generator: `npx create-ply` for project scaffolding
 
 ---
 

@@ -54,8 +54,8 @@ export default function HomePage() {
 
         <section className="mx-auto max-w-3xl mb-24">
           <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed text-center">
-            Ply is a modern backend framework designed for engineers who
-            value performance, simplicity, and full control. Built on{" "}
+            Ply is a Go web framework for engineers who value performance,
+            simplicity and full control. Built on{" "}
             <span className="font-medium text-neutral-900 dark:text-neutral-100">
               Tiered Zero-Copy Routing (TZCR)
             </span>
