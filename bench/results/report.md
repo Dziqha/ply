@@ -1,4 +1,4 @@
-# TurboGo Benchmark Report (Linux, wrk 4.2.0)
+# Ply Benchmark Report (Linux, wrk 4.2.0)
 
 - Host: Ryzen 5 5600H (12 threads), CachyOS, Go 1.26.5
 - Load: `wrk -t12 -c512 -d15s --latency`, median 3 run, urutan server diacak (fair run)
@@ -9,7 +9,7 @@
 
 | Peringkat | Framework | RPS | p50 (ms) | p99 (ms) | Non-2xx |
 |-----------|-----------|-----|----------|----------|---------|
-| 1 | turbogo | 460,504 | 0.67 | 5.08 | 0 |
+| 1 | ply | 460,504 | 0.67 | 5.08 | 0 |
 | 2 | fasthttp | 438,100 | 0.70 | 5.27 | 0 |
 | 3 | fiber2 | 429,700 | 0.72 | 5.35 | 0 |
 | 4 | fiber3 | 422,091 | 0.73 | 5.58 | 0 |
@@ -23,7 +23,7 @@
 | Peringkat | Framework | RPS | p50 (ms) | p99 (ms) | Non-2xx |
 |-----------|-----------|-----|----------|----------|---------|
 | 1 | fasthttp | 427,992 | 0.72 | 5.65 | 0 |
-| 2 | turbogo | 414,174 | 0.76 | 5.89 | 0 |
+| 2 | ply | 414,174 | 0.76 | 5.89 | 0 |
 | 3 | fiber3 | 408,175 | 0.78 | 5.83 | 0 |
 | 4 | fiber2 | 405,672 | 0.78 | 5.87 | 0 |
 | 5 | stdlib | 270,800 | 1.62 | 13.10 | 0 |
@@ -40,11 +40,11 @@ Setelah `FindInto` (slot params, 0 alloc): `./fairparams_rr.sh 5 12s /user/42`.
 | Peringkat | Framework | RPS | min-max | p99 (ms) |
 |-----------|-----------|-----|---------|----------|
 | 1 | fasthttp | 393,594 | 380,040-396,887 | 2.36 |
-| 2 | turbogo | 386,102 | 366,259-400,941 | 2.36 |
+| 2 | ply | 386,102 | 366,259-400,941 | 2.36 |
 | 3 | fiber2 | 385,100 | 370,136-392,872 | 2.40 |
 | 4 | fiber3 | 378,991 | 376,742-397,962 | 2.47 |
 
-Selisih turbogo vs fasthttp 1.9% dan vs fiber3 +1.9% — di dalam noise: **paritas**.
+Selisih ply vs fasthttp 1.9% dan vs fiber3 +1.9% — di dalam noise: **paritas**.
 
 ### c=512, t=12 (oversubscribed 12 worker + 12 server di 6C/12T, noise ±15%)
 
@@ -53,21 +53,21 @@ Selisih turbogo vs fasthttp 1.9% dan vs fiber3 +1.9% — di dalam noise: **parit
 | 1 | fasthttp | 426,374 | 388,321-443,566 | 5.4 |
 | 2 | fiber3 | 414,118 | 372,102-445,812 | 5.7 |
 | 3 | fiber2 | 391,072 | 368,681-422,960 | 5.9 |
-| 4 | turbogo | 389,963 | 379,425-432,003 | 5.9 |
+| 4 | ply | 389,963 | 379,425-432,003 | 5.9 |
 | 5 | stdlib | 273,207 | 244,673-290,676 | 11.0 |
 | 6 | gin | 259,817 | 223,766-277,831 | 11.5 |
 | 7 | chi | 253,920 | 228,895-272,967 | 15.8 |
 | 8 | echo | 249,975 | 235,055-257,737 | 19.5 |
 
 Di titik ini I/O-bound (syscall 71% CPU, lihat bagian profiling), jadi
-selisih antar-server fasthttp/fiber/turbogo tidak terpisahkan dari noise.
+selisih antar-server fasthttp/fiber/ply tidak terpisahkan dari noise.
 Yang tetap struktural: semua framework di atas fasthttp ~1.5x vs
 net/http (gin/chi/echo/stdlib).
 
 Catatan metodologi: `fairparams.sh` (blok per server) membiarkan drift
 termal membiaskan perbandingan antar-framework; angka c=512 di atas
 memakai `fairparams_rr.sh` yang men-siklus semua server tiap rep.
-Angka `params` versi lama (turbogo 379k, fiber3 431k, fasthttp 370k,
+Angka `params` versi lama (ply 379k, fiber3 431k, fasthttp 370k,
 blok per server) tidak sebanding dan sudah diganti.
 
 ## Router microbenchmark (deterministik, `go test -bench`)
@@ -99,17 +99,17 @@ Setiap framework dipanggil sebagai `fasthttp.RequestHandler` dengan
 | Kasus | Sebelum | Sesudah path fast-path | Delta vs bare |
 |-------|---------|------------------------|---------------|
 | bare fasthttp (path + switch) | 166 | 166 | — |
-| **turbogo param** | 255 | **155** | **-11 (lebih cepat)** |
+| **ply param** | 255 | **155** | **-11 (lebih cepat)** |
 | fiber v2 | 267 | 267 | +101 |
 | fiber v3 | 308 | 308 | +142 |
-| turbogo static | 203 | **113** | +71 vs bare tanpa path |
-| turbogo fast | 216 | **123** | — |
-| turbogo param-json | 721 | **552** | — |
+| ply static | 203 | **113** | +71 vs bare tanpa path |
+| ply fast | 216 | **123** | — |
+| ply param-json | 721 | **552** | — |
 
 Catatan: baseline statis "bare" (42ns) tidak pernah memanggil `ctx.Path()`,
 jadi ia tidak membayar `URI.parse` + `normalizePath`; delta +71 di baris
 itu bukan overhead framework, melainkan parsing path yang wajib untuk
-router berbasis path. Setelah fast-path, TurboGo bahkan lebih cepat dari
+router berbasis path. Setelah fast-path, Ply bahkan lebih cepat dari
 baseline bare yang sama-sama mengakses path (155 vs 166).
 
 ### Path parsing fast-path
@@ -131,12 +131,12 @@ Equivalence dijaga oleh test diferensial 50k target acak
 dengan `ctx.Path()`; bila tidak, fallback ke `ctx.Path()`. Tidak ada
 mismatch, 23.794 fast / 26.244 fallback.
 
-Efek ke RPS (run ulang, c=200 t=6, median 5): turbogo 447k, fasthttp
+Efek ke RPS (run ulang, c=200 t=6, median 5): ply 447k, fasthttp
 449k, fiber3 441k — paritas, urutan tidak berubah. Variasi antar-run
 (±15%) jauh lebih besar dari efek ini, konsisten dengan beban yang
 syscall-bound.
 
-## Fast path TurboGo (GetFast / raw fasthttp handler)
+## Fast path Ply (GetFast / raw fasthttp handler)
 
 | Endpoint | RPS | p50 (ms) | p99 (ms) |
 |----------|-----|----------|----------|
@@ -147,7 +147,7 @@ syscall-bound.
 
 | Peringkat | Framework | RPS | p50 (ms) | p99 (ms) | Non-2xx |
 |-----------|-----------|-----|----------|----------|---------|
-| 1 | turbogo | 88,537 | 5.61 | 7.16 | 0 |
+| 1 | ply | 88,537 | 5.61 | 7.16 | 0 |
 | 2 | fasthttp | 86,113 | 5.77 | 7.42 | 0 |
 | 3 | fiber3 | 81,368 | 6.09 | 7.94 | 0 |
 | 4 | fiber2 | 79,361 | 6.22 | 8.65 | 0 |
@@ -161,7 +161,7 @@ syscall-bound.
 | Peringkat | Framework | RPS | p50 (ms) | p99 (ms) | Non-2xx |
 |-----------|-----------|-----|----------|----------|---------|
 | 1 | fasthttp | 53,254 | 9.40 | 11.42 | 0 |
-| 2 | turbogo | 52,127 | 9.56 | 11.65 | 0 |
+| 2 | ply | 52,127 | 9.56 | 11.65 | 0 |
 | 3 | fiber3 | 49,945 | 9.96 | 12.50 | 0 |
 | 4 | stdlib | 48,633 | 10.24 | 12.59 | 0 |
 | 5 | fiber2 | 47,656 | 10.42 | 13.55 | 0 |
@@ -174,7 +174,7 @@ syscall-bound.
 | Peringkat | Framework | RPS | p50 (ms) | p99 (ms) | Non-2xx |
 |-----------|-----------|-----|----------|----------|---------|
 | 1 | fasthttp | 85,282 | 5.78 | 7.53 | 0 |
-| 2 | turbogo | 80,560 | 6.07 | 8.49 | 0 |
+| 2 | ply | 80,560 | 6.07 | 8.49 | 0 |
 | 3 | fiber2 | 80,384 | 6.10 | 8.55 | 0 |
 | 4 | fiber3 | 66,839 | 7.17 | 12.45 | 0 |
 | 5 | stdlib | 63,430 | 7.81 | 10.76 | 0 |
@@ -187,7 +187,7 @@ syscall-bound.
 | Peringkat | Framework | RPS | p50 (ms) | p99 (ms) | Non-2xx |
 |-----------|-----------|-----|----------|----------|---------|
 | 1 | echo | 3,792 | 94.76 | 324.51 | 0 |
-| 2 | turbogo | 3,654 | 92.12 | 330.46 | 0 |
+| 2 | ply | 3,654 | 92.12 | 330.46 | 0 |
 | 3 | stdlib | 3,297 | 93.63 | 428.66 | 0 |
 | 4 | gin | 2,830 | 124.77 | 390.91 | 0 |
 | 5 | chi | 2,808 | 183.52 | 360.38 | 0 |
@@ -206,13 +206,13 @@ syscall-bound.
 | stdlib | 32.3 MB |
 | fiber3 | 33.4 MB |
 | gin | 35.2 MB |
-| turbogo | 53.6 MB |
+| ply | 53.6 MB |
 
 ## Ringkasan peringkat (RPS @ c=512)
 
 | Framework | Rata-rata RPS (7 endpoint) | Menang (endpoint) |
 |-----------|---------------------------|-------------------|
-| turbogo | 211,251 | 2 |
+| ply | 211,251 | 2 |
 | fasthttp | 208,908 | 3 |
 | fiber3 | 208,874 | 1 |
 | fiber2 | 207,112 | 0 |
@@ -247,7 +247,7 @@ Metode: round-robin (`fairparams_rr.sh`), median 3 rep, 10s/rep.
 | Server | median | min | max | p99 ms | spread |
 |---|---|---|---|---|---|
 | fasthttp | 454,946 | 451,597 | 456,222 | 4.98 | 1.0% |
-| turbogo | 440,657 | 386,537 | 452,579 | 5.14 | 15.0% |
+| ply | 440,657 | 386,537 | 452,579 | 5.14 | 15.0% |
 | fiber3 | 428,714 | 406,174 | 444,409 | 5.38 | 8.9% |
 | fiber2 | 415,312 | 411,929 | 443,368 | 5.51 | 7.6% |
 | stdlib | 287,070 | 269,255 | 288,166 | 10.18 | 6.6% |
@@ -262,7 +262,7 @@ Metode: round-robin (`fairparams_rr.sh`), median 3 rep, 10s/rep.
 | fasthttp | 456,583 | 450,582 | 481,086 | 2.16 | 6.7% |
 | fiber3 | 447,161 | 446,463 | 447,542 | 2.25 | 0.2% |
 | fiber2 | 445,616 | 444,756 | 448,179 | 2.20 | 0.8% |
-| turbogo | 443,907 | 441,111 | 444,742 | 2.21 | 0.8% |
+| ply | 443,907 | 441,111 | 444,742 | 2.21 | 0.8% |
 | stdlib | 288,596 | 287,648 | 301,222 | 3.40 | 4.7% |
 | chi | 264,726 | 244,356 | 265,967 | 3.60 | 8.2% |
 | gin | 263,915 | 261,501 | 265,697 | 3.63 | 1.6% |
@@ -273,9 +273,9 @@ Metode: round-robin (`fairparams_rr.sh`), median 3 rep, 10s/rep.
 | Kasus | ns/req |
 |---|---|
 | bare fasthttp param | 177 |
-| turbogo param | 179 |
-| turbogo static | 148 |
-| turbogo param+json | 640 |
+| ply param | 179 |
+| ply static | 148 |
+| ply param+json | 640 |
 | fiber2 | 287 |
 | fiber3 | 312 |
 
@@ -309,7 +309,7 @@ metode sama (round-robin, median 3, 10s).
 |---|---|---|---|---|---|
 | fasthttp | 462,022 | 455,666 | 464,543 | 4.97 | 1.9% |
 | fiber2 | 453,277 | 445,724 | 456,400 | 5.08 | 2.4% |
-| turbogo | 450,054 | 433,408 | 458,268 | 5.07 | 5.5% |
+| ply | 450,054 | 433,408 | 458,268 | 5.07 | 5.5% |
 | fiber3 | 441,530 | 440,756 | 450,752 | 5.25 | 2.3% |
 | stdlib | 296,132 | 292,545 | 296,678 | 9.46 | 1.4% |
 | chi | 275,713 | 271,759 | 277,012 | 11.39 | 1.9% |
@@ -322,7 +322,7 @@ metode sama (round-robin, median 3, 10s).
 |---|---|---|---|---|---|
 | fasthttp | 453,821 | 444,840 | 459,026 | 2.20 | 3.1% |
 | fiber2 | 446,904 | 440,859 | 450,891 | 2.16 | 2.2% |
-| turbogo | 442,483 | 439,822 | 442,856 | 2.20 | 0.7% |
+| ply | 442,483 | 439,822 | 442,856 | 2.20 | 0.7% |
 | fiber3 | 439,446 | 431,254 | 443,011 | 2.24 | 2.7% |
 | stdlib | 285,608 | 285,363 | 285,989 | 3.52 | 0.2% |
 | gin | 264,289 | 262,677 | 265,495 | 3.72 | 1.1% |
@@ -334,14 +334,14 @@ metode sama (round-robin, median 3, 10s).
 | Kasus | ns/req |
 |---|---|
 | bare fasthttp param | 173 |
-| turbogo param | 180 |
+| ply param | 180 |
 | bare fasthttp static | 63 |
-| turbogo static | 144 |
-| turbogo fast | 143 |
-| turbogo param+json | 605 |
+| ply static | 144 |
+| ply fast | 143 |
+| ply param+json | 605 |
 | fiber2 | 287 |
 | fiber3 | 305 |
 
 Fiber v3 3.6.1 ~2% lebih cepat dari beta.4 di in-process (305 vs 312 ns)
-dan ~3% lebih lambat dari turbogo di wrk; peringkat fasthttp-family tidak
+dan ~3% lebih lambat dari ply di wrk; peringkat fasthttp-family tidak
 berubah, semuanya di dalam band noise.

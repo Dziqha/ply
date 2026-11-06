@@ -1,4 +1,4 @@
--- TurboGo benchmark DB schema (Techempower-style), idempotent
+-- Ply benchmark DB schema (Techempower-style), idempotent
 CREATE USER benchmark WITH PASSWORD 'benchmark';
 CREATE DATABASE hello_world OWNER benchmark;
 \c hello_world

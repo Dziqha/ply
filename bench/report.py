@@ -35,7 +35,7 @@ def main():
     ep_names = [e for e in next(iter(summary.values())).keys() if e != "rss_kb"]
 
     lines = []
-    lines.append("# TurboGo Benchmark Report (Linux, wrk 4.2.0)")
+    lines.append("# Ply Benchmark Report (Linux, wrk 4.2.0)")
     lines.append("")
     lines.append("- Host: Ryzen 5 5600H (12 threads), CachyOS, Go 1.26.5")
     lines.append("- Load: `wrk -t12 -c512 -d15s --latency`, median dari 3 run (sweep c=1..512)")

@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
 )
 
 func main() {
 	core.DisableLogger = true
 
-	app := TurboGo.New()
+	app := ply.New()
 
 	app.Get("/plaintext", PlaintextHandler)
 	app.GetFast("/plaintextfast", PlaintextFast)
@@ -30,7 +30,7 @@ func main() {
 		port = "8080"
 	}
 
-	fmt.Printf("TurboGo benchmark server listening on port %s\n", port)
+	fmt.Printf("Ply benchmark server listening on port %s\n", port)
 	if err := app.RunServer(":" + port); err != nil {
 		panic(err)
 	}

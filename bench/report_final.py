@@ -46,7 +46,7 @@ httpd.update(load('results/fairparams'))
 dbd = load('results/dbfair')
 
 out = []
-out.append("# TurboGo Benchmark Report (Linux, wrk 4.2.0)")
+out.append("# Ply Benchmark Report (Linux, wrk 4.2.0)")
 out.append("")
 out.append("- Host: Ryzen 5 5600H (12 threads), CachyOS, Go 1.26.5")
 out.append("- Load: `wrk -t12 -c512 -d15s --latency`, median 3 run, urutan server diacak (fair run)")
@@ -58,7 +58,7 @@ for ep, title in [('plaintext', 'Plaintext'), ('json', 'JSON'), ('params', 'Dyna
     t, _ = table(title, ep, httpd)
     out += t
 
-out.append("## Fast path TurboGo (GetFast / raw fasthttp handler)")
+out.append("## Fast path Ply (GetFast / raw fasthttp handler)")
 out.append("")
 out.append("| Endpoint | RPS | p50 (ms) | p99 (ms) |")
 out.append("|----------|-----|----------|----------|")
@@ -75,7 +75,7 @@ out.append("")
 out.append("| Framework | RSS |")
 out.append("|-----------|-----|")
 for s, rss in [('fasthttp', '30.3 MB'), ('echo', '31.6 MB'), ('fiber2', '31.6 MB'), ('chi', '32.2 MB'),
-               ('stdlib', '32.3 MB'), ('fiber3', '33.4 MB'), ('gin', '35.2 MB'), ('turbogo', '53.6 MB')]:
+               ('stdlib', '32.3 MB'), ('fiber3', '33.4 MB'), ('gin', '35.2 MB'), ('ply', '53.6 MB')]:
     out.append(f"| {s} | {rss} |")
 out.append("")
 

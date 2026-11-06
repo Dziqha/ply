@@ -9,8 +9,8 @@ package inproc
 import (
 	"testing"
 
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
 	fiber2 "github.com/gofiber/fiber/v2"
 	fiber3 "github.com/gofiber/fiber/v3"
 	"github.com/valyala/fasthttp"
@@ -54,9 +54,9 @@ func BenchmarkBare(b *testing.B) {
 	})
 }
 
-func BenchmarkTurboGo(b *testing.B) {
+func BenchmarkPly(b *testing.B) {
 	b.Run("static", func(b *testing.B) {
-		app := TurboGo.New()
+		app := ply.New()
 		app.Get("/plaintext", func(c *core.Context) {
 			c.Ctx.SetContentType("text/plain")
 			c.Ctx.SetBodyString("Hello, World!")
@@ -65,7 +65,7 @@ func BenchmarkTurboGo(b *testing.B) {
 	})
 
 	b.Run("param", func(b *testing.B) {
-		app := TurboGo.New()
+		app := ply.New()
 		app.Get("/user/:id", func(c *core.Context) {
 			c.Ctx.SetContentType("text/plain")
 			c.Ctx.SetBodyString("user:" + c.Param("id"))
@@ -74,7 +74,7 @@ func BenchmarkTurboGo(b *testing.B) {
 	})
 
 	b.Run("fast", func(b *testing.B) {
-		app := TurboGo.New()
+		app := ply.New()
 		app.GetFast(paramPath, func(ctx *fasthttp.RequestCtx) {
 			ctx.SetBodyString("user:42")
 		})
@@ -82,7 +82,7 @@ func BenchmarkTurboGo(b *testing.B) {
 	})
 
 	b.Run("param-json", func(b *testing.B) {
-		app := TurboGo.New()
+		app := ply.New()
 		app.Get("/user/:id", func(c *core.Context) {
 			c.JSON(200, map[string]string{"id": c.Param("id")})
 		})

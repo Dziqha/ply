@@ -21,7 +21,7 @@ require (
 )
 
 require (
-	github.com/Dziqha/TurboGo v0.0.0
+	github.com/Dziqha/ply v0.0.0
 	github.com/bytedance/gopkg v0.1.3 // indirect
 	github.com/bytedance/sonic v1.15.0 // indirect
 	github.com/bytedance/sonic/loader v0.5.0 // indirect
@@ -67,4 +67,4 @@ require (
 	google.golang.org/protobuf v1.36.10 // indirect
 )
 
-replace github.com/Dziqha/TurboGo => ../
+replace github.com/Dziqha/ply => ../

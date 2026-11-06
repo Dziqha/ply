@@ -12,7 +12,7 @@ LOGS=results/logs
 mkdir -p "$RAW" "$LOGS"
 
 declare -A PORTS=(
-  [turbogo]=8080
+  [ply]=8080
   [fiber2]=8081
   [fiber3]=8082
   [gin]=8083
@@ -87,7 +87,7 @@ bench_server() { # name
     done
   fi
 
-  if [ "$name" = "turbogo" ]; then
+  if [ "$name" = "ply" ]; then
     for ep in "${!TURBO_EXTRA[@]}"; do
       for r in $(seq 1 "$REPS"); do
         run_wrk "$name" "$ep" "${TURBO_EXTRA[$ep]}" 512 "$r"
@@ -101,7 +101,7 @@ bench_server() { # name
   echo "done: $name"
 }
 
-order=(turbogo fiber2 fiber3 gin echo chi stdlib fasthttp)
+order=(ply fiber2 fiber3 gin echo chi stdlib fasthttp)
 for s in "${order[@]}"; do
   bench_server "$s" || true
 done

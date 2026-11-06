@@ -14,8 +14,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
 	"github.com/gin-gonic/gin"
 	"github.com/gofiber/fiber/v2"
 	"github.com/labstack/echo/v4"
@@ -367,27 +367,27 @@ func setupRobustGin(port int) *gin.Engine {
 	return r
 }
 
-func setupRobustTurboGo(port int) {
-	app := TurboGo.New()
+func setupRobustPly(port int) {
+	app := ply.New()
 	core.DisableLogger = true
 
 	app.Get("/", func(ctx *core.Context) {
-		ctx.JSON(200, map[string]interface{}{"message": "Hello from TurboGo!", "path": string(ctx.Ctx.Request.URI().Path())})
+		ctx.JSON(200, map[string]interface{}{"message": "Hello from Ply!", "path": string(ctx.Ctx.Request.URI().Path())})
 	})
 	app.Get("/api/health", func(ctx *core.Context) {
-		ctx.JSON(200, map[string]interface{}{"status": "ok", "framework": "turbogo"})
+		ctx.JSON(200, map[string]interface{}{"status": "ok", "framework": "ply"})
 	})
 	app.Get("/api/v1/users", func(ctx *core.Context) {
 		ctx.JSON(200, map[string]interface{}{"users": []string{"user1", "user2"}})
 	})
 	app.Get("/user/123", func(ctx *core.Context) {
-		ctx.JSON(200, map[string]interface{}{"user_id": "123", "framework": "turbogo"})
+		ctx.JSON(200, map[string]interface{}{"user_id": "123", "framework": "ply"})
 	})
 	app.Get("/dashboard", func(ctx *core.Context) {
-		ctx.JSON(200, map[string]interface{}{"page": "dashboard", "framework": "turbogo"})
+		ctx.JSON(200, map[string]interface{}{"page": "dashboard", "framework": "ply"})
 	})
 	app.Get("/search", func(ctx *core.Context) {
-		ctx.JSON(200, map[string]interface{}{"results": []string{}, "framework": "turbogo"})
+		ctx.JSON(200, map[string]interface{}{"results": []string{}, "framework": "ply"})
 	})
 	app.Post("/api/test", func(ctx *core.Context) {
 		ctx.JSON(200, map[string]interface{}{"received": "ok"})
@@ -395,7 +395,7 @@ func setupRobustTurboGo(port int) {
 
 	go func() {
 		if err := app.RunServer(fmt.Sprintf(":%d", port)); err != nil {
-			fmt.Printf("TurboGo server error: %v\n", err)
+			fmt.Printf("Ply server error: %v\n", err)
 		}
 	}()
 	time.Sleep(300 * time.Millisecond)
@@ -595,7 +595,7 @@ func printEnhancedResults(results []*BenchmarkResult) {
 
 func main() {
 	fmt.Println("🚀 GO FRAMEWORK PERFORMANCE BENCHMARK")
-	fmt.Println("Testing: Fiber, Echo, Gin, TurboGo")
+	fmt.Println("Testing: Fiber, Echo, Gin, Ply")
 	fmt.Printf("⚡ Duration: %v, Concurrency: %v\n", testDuration, concurrencyLevels)
 	fmt.Println("🔥 No artificial rate limiting - full speed ahead!")
 	fmt.Println(strings.Repeat("=", 50))
@@ -615,7 +615,7 @@ func main() {
 		{"Fiber", basePort, func(port int) { setupRobustFiber(port) }},
 		{"Echo", basePort + 1, func(port int) { setupRobustEcho(port) }},
 		{"Gin", basePort + 2, func(port int) { setupRobustGin(port) }},
-		{"TurboGo", basePort + 3, func(port int) { setupRobustTurboGo(port) }},
+		{"Ply", basePort + 3, func(port int) { setupRobustPly(port) }},
 	}
 
 	for i, fw := range frameworks {

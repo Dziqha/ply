@@ -1,5 +1,5 @@
 {
-  "framework": "turbogo",
+  "framework": "ply",
   "tests": [
     {
       "default": {
@@ -14,7 +14,7 @@
         "approach": "Realistic",
         "classification": "Platform",
         "database": "Postgres",
-        "framework": "turbogo",
+        "framework": "ply",
         "language": "Go",
         "flavor": "None",
         "orm": "Raw",
@@ -22,7 +22,7 @@
         "webserver": "None",
         "os": "Linux",
         "database_os": "Linux",
-        "display_name": "turbogo",
+        "display_name": "ply",
         "notes": ""
       }
     }

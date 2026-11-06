@@ -4,7 +4,7 @@
 # blocks per server, which lets drift bias cross-server comparisons).
 #
 # Usage: ./fairparams_rr.sh [reps] [duration] [endpoint]
-# Env:   SERVERS="turbogo fiber3 fasthttp"  subset
+# Env:   SERVERS="ply fiber3 fasthttp"  subset
 #        WRK_T=4 WRK_C=100                  load shape (default 12/512)
 #        OUT=results/rrparams               output dir
 set -u
@@ -17,8 +17,8 @@ WRK_T=${WRK_T:-12}
 WRK_C=${WRK_C:-512}
 OUT=${OUT:-results/rrparams}
 
-declare -A P=( [turbogo]=8080 [fiber2]=8081 [fiber3]=8082 [gin]=8083 [echo]=8084 [chi]=8085 [stdlib]=8086 [fasthttp]=8087 )
-ALL=(turbogo fiber2 fiber3 gin echo chi stdlib fasthttp)
+declare -A P=( [ply]=8080 [fiber2]=8081 [fiber3]=8082 [gin]=8083 [echo]=8084 [chi]=8085 [stdlib]=8086 [fasthttp]=8087 )
+ALL=(ply fiber2 fiber3 gin echo chi stdlib fasthttp)
 if [ -n "${SERVERS:-}" ]; then
   read -r -a SERVERS <<< "$SERVERS"
 else

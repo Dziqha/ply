@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -u
 cd "$(dirname "$0")"
-declare -A P=( [turbogo]=8080 [fiber2]=8081 [fiber3]=8082 [gin]=8083 [echo]=8084 [chi]=8085 [stdlib]=8086 [fasthttp]=8087 )
-order=($(echo "turbogo fiber2 fiber3 gin echo chi stdlib fasthttp" | tr ' ' '\n' | shuf))
+declare -A P=( [ply]=8080 [fiber2]=8081 [fiber3]=8082 [gin]=8083 [echo]=8084 [chi]=8085 [stdlib]=8086 [fasthttp]=8087 )
+order=($(echo "ply fiber2 fiber3 gin echo chi stdlib fasthttp" | tr ' ' '\n' | shuf))
 OUT="$(pwd)/results/fair"
 mkdir -p "$OUT"
 for s in "${order[@]}"; do

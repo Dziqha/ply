@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TurboGo TFB setup
+# Ply TFB setup
 fw_depends postgresql
 
 # Build is handled by the Dockerfile directly

@@ -12,8 +12,8 @@ COPY *.go ./
 COPY core/ ./core/
 COPY internal/ ./internal/
 COPY middleware/ ./middleware/
-COPY bench/turbogo/ ./bench/turbogo/
-RUN cd bench && CGO_ENABLED=0 go build -o /server -ldflags="-s -w" ./turbogo
+COPY bench/ply/ ./bench/ply/
+RUN cd bench && CGO_ENABLED=0 go build -o /server -ldflags="-s -w" ./ply
 
 FROM alpine:3.21
 
