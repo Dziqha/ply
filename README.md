@@ -8,8 +8,8 @@
 [![Coverage](https://img.shields.io/badge/Coverage-51.9%25-yellow)](https://github.com/Dziqha/ply/actions)
 [![Contributions](https://img.shields.io/badge/Contributions-welcome-blueviolet)](https://github.com/Dziqha/ply/discussions)
 [![License](https://img.shields.io/github/license/Dziqha/ply)](./LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/Dziqha/ply)](https://github.com/Dziqha/ply/commits)
-[![Issues](https://img.shields.io/github/issues/Dziqha/ply)](https://github.com/Dziqha/ply/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/Dziqha/ply?style=flat)](https://github.com/Dziqha/ply/commits)
+[![Issues](https://img.shields.io/github/issues/Dziqha/ply?style=flat)](https://github.com/Dziqha/ply/issues)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./docs/public/images/ply-brand/png/ply-lockup-dark-2000w.png">
