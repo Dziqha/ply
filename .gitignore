@@ -19,3 +19,6 @@ coverage.out
 !bench/**/*.sql
 bench/results/*.json
 bench/profiler/
+
+# CLI dependencies
+/templates/node_modules/

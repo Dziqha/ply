@@ -274,18 +274,16 @@ func (r *Repository) Delete(id string) {
 function generateFeatureRouter(projectName, featureName, name) {
   return `package ${featureName}
 
-import (
-	"github.com/Dziqha/ply/core"
-)
+import "github.com/Dziqha/ply"
 
-func RegisterRoutes(router core.Router) {
+func RegisterRoutes(app *ply.App) {
 	// Initialize dependencies
 	repo := NewRepository()
 	service := NewService(repo)
 	handler := NewHandler(service)
 
 	// Register routes
-	api := router.Group("/api/${featureName}")
+	api := app.Group("/api/${featureName}")
 	{
 		api.Get("/", handler.Get)                    // GET /api/${featureName}
 		api.Post("/", handler.Create)                // POST /api/${featureName}
