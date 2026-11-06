@@ -11,7 +11,10 @@
 [![Last Commit](https://img.shields.io/github/last-commit/Dziqha/ply)](https://github.com/Dziqha/ply/commits)
 [![Issues](https://img.shields.io/github/issues/Dziqha/ply)](https://github.com/Dziqha/ply/issues)
 
-<img src="./docs/public/images/ply-brand/png/ply-lockup-2000w.png" alt="Ply — one ply over fasthttp" width="100%"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/public/images/ply-brand/png/ply-lockup-dark-2000w.png">
+  <img src="./docs/public/images/ply-brand/png/ply-lockup-2000w.png" alt="Ply — one ply over fasthttp" width="100%">
+</picture>
 
 **Ply** employs a `Tiered Zero-Copy Routing (TZCR)` system that categorizes routes into three levels—static, parametric, and wildcard—for optimal performance. Each route is precompiled and stored in a cache-aware structure, enabling fast, zero-allocation matching. Middleware is executed through efficient handler chaining, and route grouping allows modular design with custom prefixes and middlewares. This approach makes Ply ideal for high-performance applications without sacrificing flexibility.
 
