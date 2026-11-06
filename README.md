@@ -16,7 +16,7 @@
   <img src="./docs/public/images/ply-brand/png/ply-lockup-2000w.png" alt="Ply: one ply over fasthttp" width="100%">
 </picture>
 
-**Ply** uses `Tiered Zero-Copy Routing (TZCR)` to split routes into three levels: static, parametric, and wildcard. Routes are precompiled and kept in a cache-aware structure for fast, allocation-free matching. Middleware runs through chained handlers, and route groups support custom prefixes and middleware. This keeps Ply fast without giving up flexibility.
+**Ply** splits routes into three tiers: static, parametric and wildcard. Routes are precompiled and kept in a cache-aware structure for fast, allocation-free matching. Middleware runs through chained handlers, and route groups support custom prefixes and middleware. This keeps Ply fast without giving up flexibility.
 
 **Key features**
 

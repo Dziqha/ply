@@ -5,8 +5,8 @@ description: Introduction to route definitions in Ply.
 
 # Configure Routing
 
-Ply provides a flexible and high-performance routing system inspired by popular Go frameworks.
-At its core, Ply uses a **Tiered Zero-Copy Routing (TZCR)** engine that separates **static**, **parametric** and **wildcard** routes into different tiers for fast resolution.
+Ply provides a router with static, parametric and wildcard routes, plus middleware chaining and route groups.
+Ply uses a tiered routing engine that separates **static**, **parametric** and **wildcard** routes into different tiers for fast resolution.
 
 Ply precompiles handler chains, passes context with a **zero-copy** strategy and avoids unnecessary allocations. The design targets concurrency and minimal latency.
 

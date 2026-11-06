@@ -5,8 +5,8 @@ description: An introduction to the Ply documentation
 
 # Welcome to Ply
 
-Ply is a web framework for Go built on fasthttp. It provides routing,
-middleware, request contexts and built-in queue, pub/sub and cache
+Ply is a thin routing and middleware layer for Go, built on fasthttp. It
+provides routing, request contexts and built-in queue, pub/sub and cache
 engines, with a small core and no external runtime dependencies.
 
 The documentation covers the following areas:
@@ -21,16 +21,15 @@ The documentation covers the following areas:
 
 Ply keeps routing and application logic separate. Handlers are chained,
 contexts are pooled, and feature modules can be registered independently.
-The framework ships the components most services need, so a project can
-start with one dependency instead of a stack of plugins.
+It includes the engines most services need, so a project can start with
+one dependency instead of a stack of plugins.
 
 ## Routing model
 
-Ply uses Tiered Zero-Copy Routing (TZCR). Routes are grouped into static,
-parametric and wildcard tiers, then compiled into a switch-based table
-with a radix fallback. Matching is allocation-free on the hot path, and
-the compiled table falls back to the radix tree for route shapes it cannot
-represent.
+Ply groups routes into static, parametric and wildcard tiers, then
+compiles them into a switch-based table with a radix fallback. Matching is
+allocation-free on the hot path, and the compiled table falls back to the
+radix tree for route shapes it cannot represent.
 
 ## Explore the docs
 

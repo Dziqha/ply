@@ -3,21 +3,21 @@ title: Production
 description: How to deploy and run Ply in production environments.
 ---
 
-#  Production Setup
+# Production setup
 
 To run Ply in production environments, follow these steps:
 
 ---
 
-##  Requirements
+## Requirements
 
-- Go 1.26+ is required (fasthttp 1.77) for the latest features and performance.
+- Go 1.26 or newer is required (fasthttp 1.77).
 
-- Ply is built on a custom engine based on fasthttp, designed for minimal allocations, high efficiency, and fast handler chaining.
+- Ply runs on fasthttp and adds routing, middleware and context handling. The HTTP engine, parser and writer are fasthttp; Ply sits above them.
 
 ---
 
-##  Build Your App
+## Build the app
 
 ```bash
 go build -o app main.go
@@ -25,7 +25,7 @@ go build -o app main.go
 
 ---
 
-##  Behind Reverse Proxy
+## Behind a reverse proxy
 
 Use a reverse proxy to handle TLS, compression, and more:
 
@@ -45,7 +45,7 @@ location / {
 
 ---
 
-##  Process Management
+## Process management
 
 Keep your app running with:
 
@@ -55,7 +55,7 @@ Keep your app running with:
 
 ---
 
-##  Monitoring & Logging
+## Monitoring and logging
 
 Integrate with:
 

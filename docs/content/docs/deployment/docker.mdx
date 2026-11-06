@@ -3,15 +3,15 @@ title: Docker
 description: Run and deploy Ply apps using Docker containers.
 ---
 
-#  Docker Support
+# Docker support
 
-You can containerize your Ply application easily with Docker for deployment or local development.
+You can containerize a Ply application with Docker for deployment or local development.
 
 ---
 
-##  Dockerfile Example
+## Dockerfile example
 
-Here’s a minimal `Dockerfile` to build and run your app:
+The following `Dockerfile` builds and runs the app:
 
 ```docker
 # Use Go base image
@@ -36,7 +36,7 @@ CMD ["./server"]
 
 ---
 
-##  Build & Run
+## Build and run
 
 ```bash
 docker build -t my-ply-app .
@@ -45,7 +45,7 @@ docker run -p 8080:8080 my-ply-app
 
 ---
 
-##  Tips
+## Tips
 
 - Use `ENV` or `.env` files for configuration.
 - Mount volumes for logs or data if needed.
@@ -53,7 +53,7 @@ docker run -p 8080:8080 my-ply-app
 
 ---
 
-## Related Tools
+## Related tools
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
