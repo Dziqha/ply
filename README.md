@@ -1,6 +1,6 @@
 # Ply
 
-**One ply over fasthttp** — a thin, zero-allocation HTTP layer for Go.
+**One ply over fasthttp.** A thin, zero-allocation HTTP layer for Go.
 
 [![Go](https://img.shields.io/badge/Go-1.26-blue)](https://go.dev)
 [![Benchmarks](https://img.shields.io/badge/Benchmarks-PASS-brightgreen)]()
@@ -13,14 +13,14 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./docs/public/images/ply-brand/png/ply-lockup-dark-2000w.png">
-  <img src="./docs/public/images/ply-brand/png/ply-lockup-2000w.png" alt="Ply — one ply over fasthttp" width="100%">
+  <img src="./docs/public/images/ply-brand/png/ply-lockup-2000w.png" alt="Ply: one ply over fasthttp" width="100%">
 </picture>
 
-**Ply** employs a `Tiered Zero-Copy Routing (TZCR)` system that categorizes routes into three levels—static, parametric, and wildcard—for optimal performance. Each route is precompiled and stored in a cache-aware structure, enabling fast, zero-allocation matching. Middleware is executed through efficient handler chaining, and route grouping allows modular design with custom prefixes and middlewares. This approach makes Ply ideal for high-performance applications without sacrificing flexibility.
+**Ply** uses `Tiered Zero-Copy Routing (TZCR)` to split routes into three levels: static, parametric, and wildcard. Routes are precompiled and kept in a cache-aware structure for fast, allocation-free matching. Middleware runs through chained handlers, and route groups support custom prefixes and middleware. This keeps Ply fast without giving up flexibility.
 
-**Ply Key Features are :**
+**Key features**
 
-- Middleware-first — use `.Use()`
+- Middleware-first via `.Use()`
 - Ultra-fast router & context engine
 - Built-in async engines (PubSub, Queue, Cache)
 - Extensible and clean internal architecture
@@ -69,7 +69,7 @@ npx create-ply@latest myapp
 
 The generator prompts for a feature name and produces a feature-based
 project layout that is ready to extend. Node.js is required only for the
-scaffolding CLI; Ply itself has no Node.js dependency.
+scaffolding CLI. Ply itself has no Node.js dependency.
 
 ### Minimal application
 
@@ -112,7 +112,7 @@ in [Benchmarks](docs/content/docs/benchmarks.mdx).
 |---|---|---|---|---|---|
 | `GET /user/42`, c=200, t=6 | 442,483 | 453,821 | 439,446 | 264,289 | 256,752 |
 | `GET /user/42`, c=512, t=12 | 450,054 | 462,022 | 441,530 | 275,065 | 270,836 |
-| In-process, per request | 180 ns | 173 ns (bare path+switch) | 305 ns | — | — |
+| In-process, per request | 180 ns | 173 ns (bare path+switch) | 305 ns | n/a | n/a |
 
 Ply is a thin layer over fasthttp: within 3% of the engine and 1-2% of
 Fiber in the thread-matched run, and inside the noise band at
