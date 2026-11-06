@@ -30,50 +30,48 @@
 
 ---
 
-## 🔐 Example: Auth Middleware
+## Authentication
 
-Use the built-in auth middleware with environment variable `AUTH_SECRET`:
+Ply ships a JWT middleware for protecting routes. Within your app setup,
+after `app := ply.New()`:
 
 ```go
-app.Use(middleware.Auth(os.Getenv("AUTH_SECRET")))
+app.Use(middleware.AuthJWT(os.Getenv("JWT_SECRET")))
 ```
 
-Set your secret in `.env`:
+Import `os` and `github.com/Dziqha/ply/middleware`.
+
+Protected requests must send an `Authorization: Bearer <token>` header.
+Missing or invalid tokens are rejected with `401`. See the
+[Auth middleware docs](docs/content/docs/middleware/auth.mdx) for details.
+
+Set the secret before starting the server:
 
 ```bash
-export AUTH_SECRET=supersecurekey123
+export JWT_SECRET=supersecurekey123
 ```
 
 ---
 
-## 🚀 Getting started
+## Getting started
 
-###  Manual Installation Ply
+### Install
 
 ```bash
 go get github.com/Dziqha/ply
 ```
 
-### Ply CLI (`npx create-ply@latest`)
-
-> Scaffold Ply apps instantly via CLI.
+### Scaffold a project
 
 ```bash
 npx create-ply@latest myapp
 ```
 
-Interactive prompts:
+The generator prompts for a feature name and produces a feature-based
+project layout that is ready to extend. Node.js is required only for the
+scaffolding CLI; Ply itself has no Node.js dependency.
 
-* ✅ Feature name (e.g. user, auth, order)
-
-* 📁 Feature-based project structure generated automatically
-
-* ⚙️ Ready-to-extend architecture out of the box
-
-> ⚠️ We intentionally use Node.js to overcome limitations of Go's CLI tooling, especially for rich interactive workflows.
-
-### Running Ply Example
-
+### Minimal application
 
 ```go
 package main
@@ -87,26 +85,28 @@ func main() {
 	app := ply.New()
 
 	app.Get("/", func(c *core.Context) {
-		c.Text(200, "Hello from Ply!")
+		c.Text(200, "Hello from Ply")
 	})
 
 	app.RunServer(":8080")
 }
 ```
-To run the code, use the `go run` command, like:
+
+Run it with:
 
 ```bash
-go run example.go
+go run main.go
 ```
 
-> Your Ply app will be available at http://localhost:8080
+The server listens on `http://localhost:8080`.
+
 ---
 
-## 🧪 Benchmark Overview
+## Benchmarks
 
 Measured on a 6C/12T Ryzen 5 5600H with Go 1.26, `wrk` on the same host,
-round-robin reps, median of 3. Method, spread and caveats:
-[Benchmarks docs](docs/content/docs/benchmarks.mdx).
+round-robin reps, median of 3. Method, spread and caveats are documented
+in [Benchmarks](docs/content/docs/benchmarks.mdx).
 
 | Workload | Ply | fasthttp | Fiber v3 | Gin | Echo |
 |---|---|---|---|---|---|
@@ -115,29 +115,20 @@ round-robin reps, median of 3. Method, spread and caveats:
 | In-process, per request | 180 ns | 173 ns (bare path+switch) | 305 ns | — | — |
 
 Ply is a thin layer over fasthttp: within 3% of the engine and 1-2% of
-Fiber in the thread-matched run, and inside the noise band at oversubscribed
-concurrency. In-process it costs ~7 ns more than a bare path-plus-switch
-handler. What the framework adds is zero-allocation routing and built-in
-engines, not a different HTTP engine.
+Fiber in the thread-matched run, and inside the noise band at
+oversubscribed concurrency. In-process it costs about 7 ns more than a
+bare path-plus-switch handler. The value Ply adds is zero-allocation
+routing and built-in engines, not a different HTTP engine.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome — from fixing typos to suggesting ideas or building features. Ply grows through small steps, open discussions, and shared curiosity. Join the conversation on [Discussions](https://github.com/Dziqha/ply/discussions).
+Bug reports, feature requests and pull requests are welcome. Use
+[Issues](https://github.com/Dziqha/ply/issues) for bugs and
+[Discussions](https://github.com/Dziqha/ply/discussions) for questions
+and design proposals.
 
-## ❤️ About
+## License
 
-Ply is handcrafted with performance, simplicity, and extensibility in mind — empowering developers to build Go web backends without the bloat.
-
-**Ready to go fast? Build with Ply.** 🌀
-Give it a ⭐ on GitHub if you like it!
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](./LICENSE)
-
-
-> Built with love by [@dziqha](https://github.com/dziqha)
+This project is licensed under the [MIT License](./LICENSE).
