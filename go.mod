@@ -1,4 +1,4 @@
-module github.com/Dziqha/TurboGo
+module github.com/Dziqha/ply
 
 go 1.26.0
 
@@ -31,4 +31,3 @@ require (
 
 // v1.0.x predates compiled routing, zero-allocation params and the path
 // fast-path. Retracted so tooling steers new work to v1.1.0.
-retract [v1.0.0, v1.0.3]

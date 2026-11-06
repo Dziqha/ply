@@ -1,4 +1,4 @@
-package TurboGo
+package ply
 
 import (
 	"context"
@@ -17,11 +17,11 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/Dziqha/TurboGo/core"
-	"github.com/Dziqha/TurboGo/internal/cache"
-	"github.com/Dziqha/TurboGo/internal/pubsub"
-	"github.com/Dziqha/TurboGo/internal/queue"
-	"github.com/Dziqha/TurboGo/internal/router"
+	"github.com/Dziqha/ply/core"
+	"github.com/Dziqha/ply/internal/cache"
+	"github.com/Dziqha/ply/internal/pubsub"
+	"github.com/Dziqha/ply/internal/queue"
+	"github.com/Dziqha/ply/internal/router"
 	"github.com/valyala/fasthttp"
 )
 
@@ -49,7 +49,7 @@ func Banner(addr string) string {
  \/    \__,_|_|  |_.__/ \___/\____/\___/ 
                                          
 ` +
-		CenterText("🌀 TurboGo Ultra High-Performance Web Framework") + "\n" +
+		CenterText("🌀 Ply Ultra High-Performance Web Framework") + "\n" +
 		CenterText(fmt.Sprintf("⚡ Listening on: http://localhost%s", addr)) + "\n"
 }
 

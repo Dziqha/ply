@@ -11,10 +11,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/Dziqha/TurboGo/internal/cache"
-	"github.com/Dziqha/TurboGo/internal/concurrency"
-	"github.com/Dziqha/TurboGo/internal/pubsub"
-	"github.com/Dziqha/TurboGo/internal/queue"
+	"github.com/Dziqha/ply/internal/cache"
+	"github.com/Dziqha/ply/internal/concurrency"
+	"github.com/Dziqha/ply/internal/pubsub"
+	"github.com/Dziqha/ply/internal/queue"
 
 	"github.com/valyala/fasthttp"
 )

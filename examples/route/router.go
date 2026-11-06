@@ -1,12 +1,12 @@
 package route
 
 import (
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
-	"github.com/Dziqha/TurboGo/examples/controller"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
+	"github.com/Dziqha/ply/examples/controller"
 )
 
-func NewRouter(router *TurboGo.App, controller *controller.HandlerController) {
+func NewRouter(router *ply.App, controller *controller.HandlerController) {
 	router.Get("/:name", controller.GetHandler)
 	router.Post("/hello", func(ctx *core.Context) {
 		ctx.Text(200, "Hello World")

@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 )
 
 type HandlerController struct{}

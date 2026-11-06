@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 	"github.com/valyala/fasthttp"
 )
 
@@ -176,7 +176,7 @@ func TestCompress_Gzip(t *testing.T) {
 	fctx.Request.Header.Set("Accept-Encoding", "gzip")
 	c := core.NewContext(&fctx, nil, nil)
 
-	payload := strings.Repeat("TurboGo compress middleware. ", 20)
+	payload := strings.Repeat("Ply compress middleware. ", 20)
 	h := core.Handler(func(c *core.Context) {
 		c.Text(200, payload)
 	})

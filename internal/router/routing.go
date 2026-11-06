@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 	"github.com/valyala/fasthttp"
 )
 

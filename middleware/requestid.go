@@ -7,7 +7,7 @@ import (
 	"os"
 	"sync/atomic"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 )
 
 type RequestIDConfig struct {

@@ -1,4 +1,4 @@
-package TurboGo
+package ply
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 )
 
 func testReadBody(t *testing.T, resp *http.Response) string {

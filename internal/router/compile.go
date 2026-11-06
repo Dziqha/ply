@@ -3,7 +3,7 @@ package router
 import (
 	"strings"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 )
 
 // ===== Compiled-switch routing =====

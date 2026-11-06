@@ -3,7 +3,7 @@ package router
 import (
 	"testing"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 	"github.com/stretchr/testify/assert"
 )
 

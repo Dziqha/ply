@@ -3,7 +3,7 @@ package middleware
 import (
 	"strings"
 
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/valyala/fasthttp"
 )

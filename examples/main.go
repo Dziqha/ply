@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
-	"github.com/Dziqha/TurboGo/examples/controller"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
+	"github.com/Dziqha/ply/examples/controller"
 )
 
 func main() {
 
-	app := TurboGo.New().WithCache().WithQueue().WithPubsub()
+	app := ply.New().WithCache().WithQueue().WithPubsub()
 	core.DisableLogger = false
 	controller.Quehandler(app.EngineCtx)
 	go controller.PubsubHandler(app.EngineCtx)
@@ -26,7 +26,7 @@ func main() {
 		}
 
 		fmt.Println("🔄 Cache MISS:", key)
-		result := "Hello, TurboGo!"
+		result := "Hello, Ply!"
 		ctx.Cache.Memory.Set(key, []byte(result), 10*time.Second)
 		ctx.Text(200, "Generated: "+result)
 	})

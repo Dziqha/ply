@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dziqha/TurboGo/internal/pubsub"
-	"github.com/Dziqha/TurboGo/internal/queue"
+	"github.com/Dziqha/ply/internal/pubsub"
+	"github.com/Dziqha/ply/internal/queue"
 	"github.com/stretchr/testify/assert"
 )
 

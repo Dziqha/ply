@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
 	"github.com/valyala/fasthttp"
 )
 
@@ -29,7 +29,7 @@ func decodeError(t *testing.T, resp *fasthttp.Response) errorBody {
 }
 
 func TestError_HTTPError(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/e", func(c *core.Context) {
 		c.Error(core.NewHTTPError(fasthttp.StatusNotFound, "USER_NOT_FOUND", "user not found").
 			WithDetails(map[string]string{"id": "42"}))
@@ -49,7 +49,7 @@ func TestError_HTTPError(t *testing.T) {
 }
 
 func TestError_ValidationError(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Post("/e", func(c *core.Context) {
 		type payload struct {
 			Name  string `json:"name" validate:"required"`
@@ -81,7 +81,7 @@ func TestError_ValidationError(t *testing.T) {
 }
 
 func TestError_PlainErrorIs500(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/e", func(c *core.Context) {
 		c.Error(errors.New("database exploded"))
 	})
@@ -100,7 +100,7 @@ func TestError_PlainErrorIs500(t *testing.T) {
 }
 
 func TestError_ErrorStopsChain(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Use(func(c *core.Context) {
 		c.Error(core.ErrUnauthorized)
 	})
@@ -115,7 +115,7 @@ func TestError_ErrorStopsChain(t *testing.T) {
 }
 
 func TestError_PanicIsRecovered(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/panic", func(c *core.Context) {
 		panic("boom")
 	})
@@ -131,7 +131,7 @@ func TestError_PanicIsRecovered(t *testing.T) {
 }
 
 func TestError_PanicWithHTTPError(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/panic", func(c *core.Context) {
 		panic(core.ErrNotFound)
 	})
@@ -143,7 +143,7 @@ func TestError_PanicWithHTTPError(t *testing.T) {
 }
 
 func TestError_CustomErrorHandler(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.SetErrorHandler(func(c *core.Context, err error) {
 		c.Text(fasthttp.StatusTeapot, "custom: "+err.Error())
 	})
@@ -161,7 +161,7 @@ func TestError_CustomErrorHandler(t *testing.T) {
 }
 
 func TestUse_AcceptsFuncLiteral(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Use(func(c *core.Context) {
 		c.SetSession("mw", true)
 	})
@@ -180,7 +180,7 @@ func TestUse_AcceptsFuncLiteral(t *testing.T) {
 }
 
 func TestError_NextRequestUnaffected(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/panic", func(c *core.Context) {
 		panic("boom")
 	})

@@ -11,12 +11,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
 	"github.com/valyala/fasthttp"
 )
 
-func doRequest(app *TurboGo.App, method, path string, fn func(req *fasthttp.Request)) *fasthttp.Response {
+func doRequest(app *ply.App, method, path string, fn func(req *fasthttp.Request)) *fasthttp.Response {
 	ctx := &fasthttp.RequestCtx{}
 	ctx.Init(&fasthttp.Request{}, nil, nil)
 
@@ -40,7 +40,7 @@ func TestHandler_StaticFiles(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	app := TurboGo.New()
+	app := ply.New()
 	app.Static("/static", dir)
 
 	resp := doRequest(app, "GET", "/static/hello.txt", nil)
@@ -58,7 +58,7 @@ func TestHandler_StaticFiles(t *testing.T) {
 }
 
 func TestHandler_Redirect(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/old", func(c *core.Context) {
 		c.Redirect(fasthttp.StatusFound, "/new")
 	})
@@ -75,7 +75,7 @@ func TestHandler_Redirect(t *testing.T) {
 }
 
 func TestHandler_Cookies(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/set", func(c *core.Context) {
 		cookie := fasthttp.AcquireCookie()
 		cookie.SetKey("session")
@@ -131,7 +131,7 @@ type searchQuery struct {
 }
 
 func TestHandler_BindQuery(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/search", func(c *core.Context) {
 		var q searchQuery
 		if err := c.BindQuery(&q); err != nil {
@@ -166,7 +166,7 @@ type signupForm struct {
 }
 
 func TestHandler_BindForm(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Post("/signup", func(c *core.Context) {
 		var f signupForm
 		if err := c.BindForm(&f); err != nil {
@@ -195,14 +195,14 @@ func TestHandler_BindForm(t *testing.T) {
 }
 
 func TestHandler_FileUpload(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Post("/upload", func(c *core.Context) {
 		fh, err := c.FormFile("file")
 		if err != nil {
 			c.JSON(400, map[string]any{"error": err.Error()})
 			return
 		}
-		dst := filepath.Join(os.TempDir(), "turbogo-test-upload.txt")
+		dst := filepath.Join(os.TempDir(), "ply-test-upload.txt")
 		if err := c.SaveFile(fh, dst); err != nil {
 			c.JSON(500, map[string]any{"error": err.Error()})
 			return
@@ -243,9 +243,9 @@ func TestHandler_Templates(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	app := TurboGo.New().Templates(dir)
+	app := ply.New().Templates(dir)
 	app.Get("/", func(c *core.Context) {
-		c.HTML(200, "index.html", map[string]string{"Name": "TurboGo"})
+		c.HTML(200, "index.html", map[string]string{"Name": "Ply"})
 	})
 	app.Get("/user", func(c *core.Context) {
 		c.HTML(200, "user.html", map[string]string{"Name": "Budi"})
@@ -255,7 +255,7 @@ func TestHandler_Templates(t *testing.T) {
 	if resp.StatusCode() != fasthttp.StatusOK {
 		t.Fatalf("expected 200, got %d", resp.StatusCode())
 	}
-	if string(resp.Body()) != "Hello TurboGo!" {
+	if string(resp.Body()) != "Hello Ply!" {
 		t.Fatalf("unexpected body: %q", resp.Body())
 	}
 
@@ -266,7 +266,7 @@ func TestHandler_Templates(t *testing.T) {
 }
 
 func TestHandler_CustomNotFound(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.NotFound(func(c *core.Context) {
 		c.JSON(404, map[string]any{"error": "custom not found"})
 	})
@@ -281,7 +281,7 @@ func TestHandler_CustomNotFound(t *testing.T) {
 }
 
 func TestHandler_MethodNotAllowed(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Post("/data", func(c *core.Context) {})
 
 	resp := doRequest(app, "GET", "/data", nil)
@@ -291,7 +291,7 @@ func TestHandler_MethodNotAllowed(t *testing.T) {
 }
 
 func TestHandler_HeadFallbackToGet(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/ping", func(c *core.Context) {
 		c.Text(200, "pong")
 	})
@@ -306,7 +306,7 @@ func TestHandler_HeadFallbackToGet(t *testing.T) {
 }
 
 func TestHandler_Params(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/user/:id", func(c *core.Context) {
 		c.Text(200, "user-"+c.Param("id"))
 	})
@@ -321,7 +321,7 @@ func TestHandler_Params(t *testing.T) {
 }
 
 func TestContext_SSE(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/sse", func(c *core.Context) {
 		c.SSE(func(w *core.SSEWriter) {
 			w.Event("ping", "hello")

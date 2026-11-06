@@ -3,7 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 )
 
 // --- Input struct ---

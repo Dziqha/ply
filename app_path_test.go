@@ -1,4 +1,4 @@
-package TurboGo
+package ply
 
 import (
 	"math/rand"
