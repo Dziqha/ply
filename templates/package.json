@@ -1,9 +1,8 @@
 {
   "name": "create-ply",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.1",
   "bin": {
-    "create-ply": "./bin/index.js"
+    "create-ply": "bin/index.js"
   },
   "directories": {
     "lib": "lib"
@@ -21,9 +20,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
-  "description": "",
+  "description": "Scaffold a Go project using the Ply framework",
   "dependencies": {
     "chalk": "^5.4.1",
     "commander": "^14.0.0",
@@ -31,5 +30,19 @@
     "fs-extra": "^11.3.0",
     "inquirer": "^12.7.0",
     "ora": "^8.2.0"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "utils/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dziqha/ply.git",
+    "directory": "templates"
+  },
+  "homepage": "https://ply.dev",
+  "bugs": {
+    "url": "https://github.com/Dziqha/ply/issues"
   }
 }
