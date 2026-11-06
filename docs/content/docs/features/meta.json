@@ -14,6 +14,11 @@
     "queue",
     "tls",
     "graceful-shutdown",
-    "session"
+    "session",
+    "websocket",
+    "openapi",
+    "oauth2",
+    "oidc",
+    "grpc-gateway"
   ]
 }

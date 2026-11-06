@@ -109,6 +109,11 @@ func (a *App) Route(path string) *router.Route {
 	return nil
 }
 
+// Routes returns the registered route metadata.
+func (a *App) Routes() []*router.Route {
+	return a.routes
+}
+
 func (a *App) newServer() *fasthttp.Server {
 	// Handler() freezes routing into the compiled-switch table (see there).
 	srv := &fasthttp.Server{
@@ -272,6 +277,7 @@ func (a *App) Add(methods []string, path string, h core.Handler, hs ...core.Hand
 	route := &router.Route{
 		Path:     path,
 		Method:   methods[0],
+		Methods:  append([]string(nil), methods...),
 		Handlers: handlerChain,
 		Options:  router.RouteOptions{Disable: true},
 	}

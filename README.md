@@ -5,7 +5,7 @@
 [![Go](https://img.shields.io/badge/Go-1.26-blue)](https://go.dev)
 [![Benchmarks](https://img.shields.io/badge/Benchmarks-PASS-brightgreen)]()
 [![Go Report Card](https://goreportcard.com/badge/github.com/Dziqha/ply)](https://goreportcard.com/report/github.com/Dziqha/ply)
-[![Coverage](https://img.shields.io/badge/Coverage-51.9%25-yellow)](https://github.com/Dziqha/ply/actions)
+[![Coverage](https://img.shields.io/badge/Coverage-69.3%25-yellow)](https://github.com/Dziqha/ply/actions)
 [![Contributions](https://img.shields.io/badge/Contributions-welcome-blueviolet)](https://github.com/Dziqha/ply/discussions)
 [![License](https://img.shields.io/github/license/Dziqha/ply)](./LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Dziqha/ply?style=flat)](https://github.com/Dziqha/ply/commits)
@@ -27,6 +27,10 @@
 - Optional middleware: Auth, Logger, Recovery, Security Headers, Body Limit,
   Health Checks, Structured Logging, ETag and Metrics
 - Cookie-backed sessions with a pluggable store
+- WebSocket upgrade helpers with ping, origin and message-size controls
+- OpenAPI 3.0 generation from route metadata
+- OAuth2 authorization code flow with PKCE and OpenID Connect verification
+- JSON gateway for unary gRPC methods
 - Test helpers: `app.Test(req)` runs requests in-process, no port needed
 - CLI generator: `npx create-ply` for project scaffolding
 
@@ -82,6 +86,28 @@ with a pluggable store.
 
 See the [middleware docs](docs/content/docs/middleware) for configuration and
 ordering details.
+
+---
+
+## API building blocks
+
+Ply includes optional packages for the common edges of an HTTP service. The
+snippet assumes the handlers and provider are already configured.
+
+```go
+app.Get("/ws", websocket.New().Handler(handleWebSocket))
+app.Get("/openapi.json", openapi.New(app).Handler())
+app.Get("/auth/login", login)
+app.Use(oidcProvider.Verifier().Middleware())
+grpcGateway.Mount(app, "/grpc")
+```
+
+Each package is independent. Import only the ones the service uses. See the
+[WebSocket](docs/content/docs/features/websocket.mdx),
+[OpenAPI](docs/content/docs/features/openapi.mdx),
+[OAuth2](docs/content/docs/features/oauth2.mdx),
+[OpenID Connect](docs/content/docs/features/oidc.mdx), and
+[gRPC Gateway](docs/content/docs/features/grpc-gateway.mdx) guides.
 
 ---
 

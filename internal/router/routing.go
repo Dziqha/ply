@@ -10,8 +10,15 @@ import (
 
 type Route struct {
 	Method      string
+	Methods     []string
 	Path        string
 	Name        string
+	Summary     string
+	Description string
+	Tags        []string
+	OperationID string
+	Deprecated  bool
+	Hidden      bool
 	Handlers    []core.Handler
 	Options     RouteOptions
 	FastHandler fasthttp.RequestHandler
