@@ -1,0 +1,14 @@
+{
+  "title": "Middleware",
+  "pages": [
+    "auth",
+    "recovery",
+    "cors",
+    "csrf",
+    "ratelimit",
+    "compress",
+    "requestid",
+    "timeout",
+    "basicauth"
+  ]
+}

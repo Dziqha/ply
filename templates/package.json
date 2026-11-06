@@ -1,6 +1,6 @@
 {
   "name": "create-ply",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "bin": {
     "create-ply": "bin/index.js"
   },
@@ -41,7 +41,7 @@
     "url": "git+https://github.com/Dziqha/ply.git",
     "directory": "templates"
   },
-  "homepage": "https://ply.dev",
+  "homepage": "https://ply.web.id",
   "bugs": {
     "url": "https://github.com/Dziqha/ply/issues"
   }

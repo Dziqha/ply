@@ -1,0 +1,18 @@
+{
+  "title": "Features",
+  "pages": [
+    "binding",
+    "validation",
+    "sse",
+    "upload",
+    "cookies",
+    "static",
+    "templates",
+    "cache",
+    "logger",
+    "pubsub",
+    "queue",
+    "tls",
+    "graceful-shutdown"
+  ]
+}

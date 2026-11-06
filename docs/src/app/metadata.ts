@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const defaultMetadata: Metadata = {
   title: {
-    default: "Ply Documentation",
+    default: "Ply - Go web framework built on fasthttp",
     template: "%s | Ply Docs",
   },
   description:
@@ -10,21 +10,19 @@ export const defaultMetadata: Metadata = {
   keywords: [
     "Golang",
     "Ply",
-    "framework",
+    "fasthttp",
+    "Go framework",
     "documentation",
     "API",
     "web",
-    "Go framework",
-    "fast",
-    "performance",
     "backend",
     "microservices",
   ],
-  authors: [{ name: "Ply", url: "https://ply.dev" }],
+  authors: [{ name: "Ply", url: "https://ply.web.id" }],
   creator: "Dziqha",
   publisher: "Ply",
   category: "technology",
-  metadataBase: new URL("https://ply.dev"),
+  metadataBase: new URL("https://ply.web.id"),
   robots: {
     index: true,
     follow: true,
@@ -42,19 +40,15 @@ export const defaultMetadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://ply.dev",
-    languages: {
-      "en-US": "https://ply.dev",
-      "id-ID": "https://ply.dev/id",
-    },
+    canonical: "/",
   },
 
   openGraph: {
-    title: "Ply Documentation",
+    title: "Ply - Go web framework built on fasthttp",
     description:
       "Documentation for Ply, a fast and lightweight Go web framework built on fasthttp.",
-    url: "https://ply.dev/docs",
-    siteName: "Ply Docs",
+    url: "https://ply.web.id",
+    siteName: "Ply",
     images: [
       {
         url: "/images/og-ply.png",
@@ -64,13 +58,12 @@ export const defaultMetadata: Metadata = {
       },
     ],
     locale: "en_US",
-    alternateLocale: ["id_ID"],
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Ply Documentation",
+    title: "Ply - Go web framework built on fasthttp",
     description:
       "Documentation for Ply, a fast and lightweight Go web framework built on fasthttp.",
     site: "@Dziqha",

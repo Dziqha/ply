@@ -24,8 +24,12 @@ export default function Layout({ children }: { children: ReactNode }) {
               applicationCategory: "DeveloperApplication",
               operatingSystem: "Cross-platform",
               description:
-                "A fast Go framework for building web applications and APIs",
-              url: "https://ply.dev",
+                "A fast and lightweight Go web framework built on fasthttp.",
+              url: "https://ply.web.id",
+              codeRepository: "https://github.com/Dziqha/ply",
+              programmingLanguage: "Go",
+              license: "https://opensource.org/licenses/MIT",
+              downloadUrl: "https://pkg.go.dev/github.com/Dziqha/ply",
               author: {
                 "@type": "Person",
                 name: "Dziqha",
@@ -34,11 +38,6 @@ export default function Layout({ children }: { children: ReactNode }) {
                 "@type": "Offer",
                 price: "0",
                 priceCurrency: "USD",
-              },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "5",
-                ratingCount: "100",
               },
             }),
           }}
@@ -51,14 +50,9 @@ export default function Layout({ children }: { children: ReactNode }) {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Ply",
-              url: "https://ply.dev",
-              logo: "https://ply.dev/images/icon.png",
-              sameAs: ["https://twitter.com/ply_dev"],
-              contactPoint: {
-                "@type": "ContactPoint",
-                contactType: "Developer Support",
-                url: "https://ply.dev",
-              },
+              url: "https://ply.web.id",
+              logo: "https://ply.web.id/images/ply-icon-512.png",
+              sameAs: ["https://github.com/Dziqha/ply"],
             }),
           }}
         />
@@ -70,12 +64,8 @@ export default function Layout({ children }: { children: ReactNode }) {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Ply Documentation",
-              url: "https://ply.dev",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://ply.dev/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
+              url: "https://ply.web.id",
+              inLanguage: "en",
             }),
           }}
         />
