@@ -1,19 +1,19 @@
 {
-  "name": "TurboGo Documentation",
-  "short_name": "TurboGo",
-  "description": "Official documentation for TurboGo – a blazing fast Go framework",
+  "name": "Ply Documentation",
+  "short_name": "Ply",
+  "description": "Official documentation for Ply \u2013 a blazing fast Go framework",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#F4EFE6",
+  "theme_color": "#14110F",
   "icons": [
     {
-      "src": "/images/cyclone.png",
+      "src": "/images/ply-icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/images/cyclone.png",
+      "src": "/images/ply-icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

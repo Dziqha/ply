@@ -1,13 +1,13 @@
 ---
 title: Welcome
-description: Welcome to the TurboGo documentation!
+description: Welcome to the Ply documentation!
 ---
 
-#  Welcome to TurboGo
+#  Welcome to Ply
 
-TurboGo is a modern, high-performance web framework for Go, designed with modularity, developer experience, and blazing-fast routing at its core.
+Ply is a modern, high-performance web framework for Go, designed with modularity, developer experience, and blazing-fast routing at its core.
 
-Whether you're building REST APIs, background workers, or full-blown web services, TurboGo provides:
+Whether you're building REST APIs, background workers, or full-blown web services, Ply provides:
 
 - Middleware-first routing with handler chaining
 - Built-in queue system and pub/sub
@@ -17,20 +17,20 @@ Whether you're building REST APIs, background workers, or full-blown web service
 
 ---
 
-##  What is TurboGo?
+##  What is Ply?
 
-🌀 **TurboGo** is a lightweight, middleware-first framework for building fast and scalable backend applications in Go.
+🌀 **Ply** is a lightweight, middleware-first framework for building fast and scalable backend applications in Go.
 
-Unlike traditional Go frameworks that tightly couple logic and routing, TurboGo gives you full control over execution flow using chained handlers, custom contexts, and built-in systems for queues and messaging — all designed to reduce boilerplate and improve modularity.
+Unlike traditional Go frameworks that tightly couple logic and routing, Ply gives you full control over execution flow using chained handlers, custom contexts, and built-in systems for queues and messaging — all designed to reduce boilerplate and improve modularity.
 
-🔀 TurboGo Routing Philosophy
-TurboGo introduces a custom Tiered Zero-Copy Routing (TZCR) model powered by a compiled-switch router with a radix fallback. This design prioritizes speed by avoiding unnecessary allocations and resolving routes in a tiered fashion:
+🔀 Ply Routing Philosophy
+Ply introduces a custom Tiered Zero-Copy Routing (TZCR) model powered by a compiled-switch router with a radix fallback. This design prioritizes speed by avoiding unnecessary allocations and resolving routes in a tiered fashion:
 
 - Static, parametric, and wildcard routes are handled in separate tiers for minimal lookup time.
 
 - Middleware and handlers are precompiled and chained efficiently with zero-copy context passing.
 
-This approach results in ultra-fast response times, even under high concurrency, making TurboGo ideal for performance-critical APIs and microservices.
+This approach results in ultra-fast response times, even under high concurrency, making Ply ideal for performance-critical APIs and microservices.
 
 
 

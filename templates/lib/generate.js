@@ -44,7 +44,7 @@ export async function generateProject(projectName, projectPath, config) {
 
   await execa("go", ["mod", "init", projectName], { cwd: projectPath });
 
-  await execa("go", ["get", "github.com/Dziqha/TurboGo@latest"], {
+  await execa("go", ["get", "github.com/Dziqha/ply@latest"], {
     cwd: projectPath,
   });
 }
@@ -61,12 +61,12 @@ function generateMainFile(projectName, features) {
   return `package main
 
 import (
-	"github.com/Dziqha/TurboGo"
+	"github.com/Dziqha/ply"
 ${featureImports}
 )
 
 func main() {
-	app := TurboGo.New()
+	app := ply.New()
 	
 	// Register feature routes
 ${featureRegistrations}
@@ -80,7 +80,7 @@ function generateHandler(name) {
   return `package ${name.toLowerCase()}
 
 import (
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 )
 
 type Handler struct {
@@ -275,7 +275,7 @@ function generateFeatureRouter(projectName, featureName, name) {
   return `package ${featureName}
 
 import (
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply/core"
 )
 
 func RegisterRoutes(router core.Router) {
@@ -300,7 +300,7 @@ func RegisterRoutes(router core.Router) {
 function generateDotEnv(config) {
   let envContent = `# Application Configuration
 PORT=8080
-APP_NAME=TurboGoApp
+APP_NAME=PlyApp
 ENV=development
 
 `;
@@ -315,14 +315,14 @@ ENV=development
         envContent += `DB_DRIVER=postgres
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=turbogo_db
+DB_NAME=ply_db
 DB_USER=postgres
 DB_PASSWORD=password
 DB_SSLMODE=disable
 DB_TIMEZONE=Asia/Jakarta
 
 # Connection String (alternative)
-DATABASE_URL=postgres://postgres:password@localhost:5432/turbogo_db?sslmode=disable
+DATABASE_URL=postgres://postgres:password@localhost:5432/ply_db?sslmode=disable
 `;
         break;
 
@@ -330,7 +330,7 @@ DATABASE_URL=postgres://postgres:password@localhost:5432/turbogo_db?sslmode=disa
         envContent += `DB_DRIVER=mysql
 DB_HOST=localhost
 DB_PORT=3306
-DB_NAME=turbogo_db
+DB_NAME=ply_db
 DB_USER=root
 DB_PASSWORD=password
 DB_CHARSET=utf8mb4
@@ -338,16 +338,16 @@ DB_PARSETIME=true
 DB_LOC=Local
 
 # Connection String (alternative)
-DATABASE_URL=root:password@tcp(localhost:3306)/turbogo_db?charset=utf8mb4&parseTime=True&loc=Local
+DATABASE_URL=root:password@tcp(localhost:3306)/ply_db?charset=utf8mb4&parseTime=True&loc=Local
 `;
         break;
 
       case "SQLite":
         envContent += `DB_DRIVER=sqlite
-DB_PATH=./turbogo.db
+DB_PATH=./ply.db
 
 # Connection String (alternative)
-DATABASE_URL=file:./turbogo.db
+DATABASE_URL=file:./ply.db
 `;
         break;
 
@@ -355,20 +355,20 @@ DATABASE_URL=file:./turbogo.db
         envContent += `DB_DRIVER=mongodb
 DB_HOST=localhost
 DB_PORT=27017
-DB_NAME=turbogo_db
+DB_NAME=ply_db
 DB_USER=
 DB_PASSWORD=
 DB_AUTH_SOURCE=admin
 
 # Connection String (alternative)
-MONGODB_URI=mongodb://localhost:27017/turbogo_db
+MONGODB_URI=mongodb://localhost:27017/ply_db
 `;
         break;
 
       default:
         envContent += `DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=turbogo_db
+DB_NAME=ply_db
 DB_USER=postgres
 DB_PASSWORD=password
 `;
@@ -379,7 +379,7 @@ DB_PASSWORD=password
 # DB_DRIVER=postgres
 # DB_HOST=localhost
 # DB_PORT=5432
-# DB_NAME=turbogo_db
+# DB_NAME=ply_db
 # DB_USER=postgres
 # DB_PASSWORD=password
 `;
@@ -439,7 +439,7 @@ brew install postgresql
 ### Create Database
 \`\`\`bash
 psql -U postgres
-CREATE DATABASE turbogo_db;
+CREATE DATABASE ply_db;
 \\q
 \`\`\`
 
@@ -461,7 +461,7 @@ brew install mysql
 ### Create Database
 \`\`\`bash
 mysql -u root -p
-CREATE DATABASE turbogo_db;
+CREATE DATABASE ply_db;
 EXIT;
 \`\`\`
 
@@ -474,7 +474,7 @@ Configure your MySQL credentials in \`.env\` file.
         dbSection += `### SQLite Setup
 SQLite tidak memerlukan instalasi server. Database file akan dibuat otomatis saat aplikasi pertama kali dijalankan.
 
-File database akan tersimpan di: \`./turbogo.db\`
+File database akan tersimpan di: \`./ply.db\`
 `;
         break;
 
@@ -536,7 +536,7 @@ go get go.mongodb.org/mongo-driver/mongo
 
   return `# 🚀 ${project}
 
-Generated with [TurboGo CLI](https://github.com/Dziqha/TurboGo)
+Generated with [Ply CLI](https://github.com/Dziqha/ply)
 
 ## 📁 Feature-Based Architecture
 
@@ -592,7 +592,7 @@ Server akan berjalan di: \`http://localhost:8080\`
 
 ### Menggunakan CLI:
 \`\`\`bash
-create-turbogo add-feature
+create-ply add-feature
 \`\`\`
 
 ## 🔗 API Endpoints:
@@ -616,7 +616,7 @@ ${features
 
 ## 📚 Resources:
 
-- [TurboGo Documentation](https://github.com/Dziqha/TurboGo)
+- [Ply Documentation](https://github.com/Dziqha/ply)
 - [Go Documentation](https://golang.org/doc/)
 ${config.database ? `- [${config.database.type} Documentation](${getDbDocUrl(config.database.type)})` : ""}
 

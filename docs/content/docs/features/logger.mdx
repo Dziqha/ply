@@ -1,11 +1,11 @@
 ---
 title: Logger
-description: Structured and colorful request logging for TurboGo web apps.
+description: Structured and colorful request logging for Ply web apps.
 ---
 
 # Configure Logger
 
-TurboGo includes a built-in structured logger that prints HTTP request logs in a clean and colorized format.  
+Ply includes a built-in structured logger that prints HTTP request logs in a clean and colorized format.  
 Logging is useful during development for observing route hits, debugging, and performance tracing.
 
 ---
@@ -16,7 +16,7 @@ By default, logger is **enabled automatically** when the app starts:
 
 ```go
 func main() {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/", func(ctx *core.Context) {
 		ctx.Text(200, "Hello, world!")
 	})
@@ -28,7 +28,7 @@ To **disable** logging globally, set the following **before starting the app**:
 ```go
 func main() {
 	core.DisableLogger = true // 🔇 Turn off logging
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/", func(ctx *core.Context) {
 		ctx.Text(200, "Logging disabled!")
 	})
@@ -41,10 +41,10 @@ func main() {
 
 ## How It Works
 
-TurboGo's logger prints structured logs for each request with the following format:
+Ply's logger prints structured logs for each request with the following format:
 
 ```log
-🌀 TurboGo [05:50:35] GET / [200]
+🌀 Ply [05:50:35] GET / [200]
 ```
 
 Each log includes:
@@ -60,9 +60,9 @@ Each log includes:
 ## Example Log Output
 
 ```
-🌀 TurboGo [12:03:11] GET /             [200]
-🌀 TurboGo [12:03:13] POST /api/user    [201]
-🌀 TurboGo [12:03:15] GET /not-found    [404]
+🌀 Ply [12:03:11] GET /             [200]
+🌀 Ply [12:03:13] POST /api/user    [201]
+🌀 Ply [12:03:15] GET /not-found    [404]
 ```
 
 Color coding:

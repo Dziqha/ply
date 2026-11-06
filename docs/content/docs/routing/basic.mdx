@@ -1,16 +1,16 @@
 ---
 title: Routing
-description: Introduction to route definitions in TurboGo.
+description: Introduction to route definitions in Ply.
 ---
 
 # Configure Routing
 
-TurboGo provides a flexible and high-performance routing system inspired by popular Go frameworks.
-At its core, TurboGo uses a custom **Tiered Zero-Copy Routing (TZCR)** engine that separates **static**, **parametric**, and **wildcard** routes into different tiers for ultra-fast resolution.
+Ply provides a flexible and high-performance routing system inspired by popular Go frameworks.
+At its core, Ply uses a custom **Tiered Zero-Copy Routing (TZCR)** engine that separates **static**, **parametric**, and **wildcard** routes into different tiers for ultra-fast resolution.
 
-Unlike traditional routers, TurboGo precompiles handler chains, passes context using a **zero-copy** strategy, and avoids unnecessary allocations — all designed to optimize for concurrency and minimal latency.
+Unlike traditional routers, Ply precompiles handler chains, passes context using a **zero-copy** strategy, and avoids unnecessary allocations — all designed to optimize for concurrency and minimal latency.
 
-> 🧪 In internal benchmarks, TurboGo consistently outperforms popular frameworks like Gin and Fiber in routing-heavy workloads.
+> 🧪 In internal benchmarks, Ply consistently outperforms popular frameworks like Gin and Fiber in routing-heavy workloads.
 
 
 
@@ -19,7 +19,7 @@ Unlike traditional routers, TurboGo precompiles handler chains, passes context u
 ##  Basic Example
 
 ```go
-app := TurboGo.New()
+app := ply.New()
 
 app.Get("/hello", func(c *core.Context) {
     c.Text(200, "Hello, World!")
@@ -30,7 +30,7 @@ app.Get("/hello", func(c *core.Context) {
 
 ##  Route Structure
 
-TurboGo uses clear method-based route definitions:
+Ply uses clear method-based route definitions:
 
 - `app.Get(path, handler)`
 - `app.Post(path, handler)`
@@ -54,7 +54,7 @@ group.Post("/users", CreateUserHandler)
 
 ## Compiled routing
 
-When the server starts, TurboGo transcribes the radix tree into a
+When the server starts, Ply transcribes the radix tree into a
 compiled-switch table (per-method decision trees + ordered wildcard
 prefixes). Static routes keep their O(1) map fast path; parametric and
 wildcard lookups run branch-predictor-friendly whole-segment compares with
@@ -87,7 +87,7 @@ lazily on the next lookup — no restart or manual step needed.
 
 fasthttp parses the request URI and normalizes the path (percent-decoding,
 duplicate slashes, `/./`, `/../`) on the first `ctx.Path()` call, which
-dominates handler CPU for simple routes. TurboGo checks the raw request
+dominates handler CPU for simple routes. Ply checks the raw request
 target first and uses it directly when normalization provably cannot
 change it (no `%`, `\`, `//`, `/./`, `/..`, control bytes; query and
 fragment trimmed), falling back to `ctx.Path()` otherwise. Routing input

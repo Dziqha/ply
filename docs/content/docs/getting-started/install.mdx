@@ -1,11 +1,11 @@
 ---
 title: Installation
-description: How to install TurboGo locally or for production
+description: How to install Ply locally or for production
 ---
 
 #  Installation
 
-You can install TurboGo easily using the CLI or manually from source.  
+You can install Ply easily using the CLI or manually from source.  
 Choose the method that works best for your workflow.
 
 ---
@@ -28,10 +28,10 @@ Make sure your system meets the following requirements:
 
 ##  Install via CLI
 
-The recommended way to get started is with the TurboGo CLI:
+The recommended way to get started is with the Ply CLI:
 
 ```bash
-npx create-turbogo@latest my-app
+npx create-ply@latest my-app
 ```
 
 > ➡️ Learn more in the [CLI Reference](/docs/reference/cli)
@@ -56,9 +56,9 @@ cd my-project
 go mod init github.com/yourusername/my-project
 ```
 > Replace github.com/yourusername/my-project with your actual module path.
-### Install TurboGo Package
+### Install Ply Package
 ```bash
-go get github.com/Dziqha/TurboGo
+go get github.com/Dziqha/ply
 ```
 ### Create main.go
 ```bash
@@ -66,15 +66,15 @@ go get github.com/Dziqha/TurboGo
 package main
 
 import (
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
 )
 
 func main() {
-	app := TurboGo.New()
+	app := ply.New()
 
 	app.Get("/", func(c *core.Context) {
-		c.Text(200, "Hello from TurboGo!")
+		c.Text(200, "Hello from Ply!")
 	})
 
 	app.RunServer(":8080")
@@ -84,6 +84,6 @@ func main() {
 ```bash
 go run main.go
 ```
-> Your TurboGo app will be available at http://localhost:8080
+> Your Ply app will be available at http://localhost:8080
 
 </div>

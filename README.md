@@ -1,19 +1,21 @@
-# TurboGo
+# Ply
+
+**One ply over fasthttp** — a thin, zero-allocation HTTP layer for Go.
 
 [![Go](https://img.shields.io/badge/Go-1.26-blue)](https://go.dev)
 [![Benchmarks](https://img.shields.io/badge/Benchmarks-PASS-brightgreen)]()
-[![Go Report Card](https://goreportcard.com/badge/github.com/Dziqha/TurboGo)](https://goreportcard.com/report/github.com/Dziqha/TurboGo)
-[![Coverage](https://img.shields.io/badge/Coverage-51.9%25-yellow)](https://github.com/Dziqha/TurboGo/actions)
-[![Contributions](https://img.shields.io/badge/Contributions-welcome-blueviolet)](https://github.com/Dziqha/TurboGo/discussions)
-[![License](https://img.shields.io/github/license/Dziqha/TurboGo)](./LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/Dziqha/TurboGo)](https://github.com/Dziqha/TurboGo/commits)
-[![Issues](https://img.shields.io/github/issues/Dziqha/TurboGo)](https://github.com/Dziqha/TurboGo/issues)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Dziqha/ply)](https://goreportcard.com/report/github.com/Dziqha/ply)
+[![Coverage](https://img.shields.io/badge/Coverage-51.9%25-yellow)](https://github.com/Dziqha/ply/actions)
+[![Contributions](https://img.shields.io/badge/Contributions-welcome-blueviolet)](https://github.com/Dziqha/ply/discussions)
+[![License](https://img.shields.io/github/license/Dziqha/ply)](./LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/Dziqha/ply)](https://github.com/Dziqha/ply/commits)
+[![Issues](https://img.shields.io/github/issues/Dziqha/ply)](https://github.com/Dziqha/ply/issues)
 
-<img src="./docs/public/images/icon.png" alt="TurboGo Banner" width="100%"/>
+<img src="./docs/public/images/ply-brand/png/ply-lockup-2000w.png" alt="Ply — one ply over fasthttp" width="100%"/>
 
-**TurboGo** employs a `Tiered Zero-Copy Routing (TZCR)` system that categorizes routes into three levels—static, parametric, and wildcard—for optimal performance. Each route is precompiled and stored in a cache-aware structure, enabling fast, zero-allocation matching. Middleware is executed through efficient handler chaining, and route grouping allows modular design with custom prefixes and middlewares. This approach makes TurboGo ideal for high-performance applications without sacrificing flexibility.
+**Ply** employs a `Tiered Zero-Copy Routing (TZCR)` system that categorizes routes into three levels—static, parametric, and wildcard—for optimal performance. Each route is precompiled and stored in a cache-aware structure, enabling fast, zero-allocation matching. Middleware is executed through efficient handler chaining, and route grouping allows modular design with custom prefixes and middlewares. This approach makes Ply ideal for high-performance applications without sacrificing flexibility.
 
-**TurboGo Key Features are :**
+**Ply Key Features are :**
 
 - Middleware-first — use `.Use()`
 - Ultra-fast router & context engine
@@ -21,7 +23,7 @@
 - Extensible and clean internal architecture
 - Optional middleware: Auth, Logger, Recovery
 - Test helpers: `app.Test(req)` runs requests in-process, no port needed
-- CLI generator: `npx create-turbogo` for instant project scaffolding
+- CLI generator: `npx create-ply` for instant project scaffolding
 
 ---
 
@@ -43,18 +45,18 @@ export AUTH_SECRET=supersecurekey123
 
 ## 🚀 Getting started
 
-###  Manual Installation TurboGo
+###  Manual Installation Ply
 
 ```bash
-go get github.com/Dziqha/TurboGo
+go get github.com/Dziqha/ply
 ```
 
-### TurboGo CLI (`npx create-turbogo@latest`)
+### Ply CLI (`npx create-ply@latest`)
 
-> Scaffold TurboGo apps instantly via CLI.
+> Scaffold Ply apps instantly via CLI.
 
 ```bash
-npx create-turbogo@latest myapp
+npx create-ply@latest myapp
 ```
 
 Interactive prompts:
@@ -67,22 +69,22 @@ Interactive prompts:
 
 > ⚠️ We intentionally use Node.js to overcome limitations of Go's CLI tooling, especially for rich interactive workflows.
 
-### Running TurboGo Example
+### Running Ply Example
 
 
 ```go
 package main
 
 import (
-	"github.com/Dziqha/TurboGo"
-	"github.com/Dziqha/TurboGo/core"
+	"github.com/Dziqha/ply"
+	"github.com/Dziqha/ply/core"
 )
 
 func main() {
-	app := TurboGo.New()
+	app := ply.New()
 
 	app.Get("/", func(c *core.Context) {
-		c.Text(200, "Hello from TurboGo!")
+		c.Text(200, "Hello from Ply!")
 	})
 
 	app.RunServer(":8080")
@@ -94,7 +96,7 @@ To run the code, use the `go run` command, like:
 go run example.go
 ```
 
-> Your TurboGo app will be available at http://localhost:8080
+> Your Ply app will be available at http://localhost:8080
 ---
 
 ## 🧪 Benchmark Overview
@@ -103,13 +105,13 @@ Measured on a 6C/12T Ryzen 5 5600H with Go 1.26, `wrk` on the same host,
 round-robin reps, median of 3. Method, spread and caveats:
 [Benchmarks docs](docs/content/docs/benchmarks.mdx).
 
-| Workload | TurboGo | fasthttp | Fiber v3 | Gin | Echo |
+| Workload | Ply | fasthttp | Fiber v3 | Gin | Echo |
 |---|---|---|---|---|---|
 | `GET /user/42`, c=200, t=6 | 442,483 | 453,821 | 439,446 | 264,289 | 256,752 |
 | `GET /user/42`, c=512, t=12 | 450,054 | 462,022 | 441,530 | 275,065 | 270,836 |
 | In-process, per request | 180 ns | 173 ns (bare path+switch) | 305 ns | — | — |
 
-TurboGo is a thin layer over fasthttp: within 3% of the engine and 1-2% of
+Ply is a thin layer over fasthttp: within 3% of the engine and 1-2% of
 Fiber in the thread-matched run, and inside the noise band at oversubscribed
 concurrency. In-process it costs ~7 ns more than a bare path-plus-switch
 handler. What the framework adds is zero-allocation routing and built-in
@@ -119,13 +121,13 @@ engines, not a different HTTP engine.
 
 ## 🤝 Contributing
 
-Contributions are welcome — from fixing typos to suggesting ideas or building features. TurboGo grows through small steps, open discussions, and shared curiosity. Join the conversation on [Discussions](https://github.com/Dziqha/TurboGo/discussions).
+Contributions are welcome — from fixing typos to suggesting ideas or building features. Ply grows through small steps, open discussions, and shared curiosity. Join the conversation on [Discussions](https://github.com/Dziqha/ply/discussions).
 
 ## ❤️ About
 
-TurboGo is handcrafted with performance, simplicity, and extensibility in mind — empowering developers to build Go web backends without the bloat.
+Ply is handcrafted with performance, simplicity, and extensibility in mind — empowering developers to build Go web backends without the bloat.
 
-**Ready to go fast? Build with TurboGo.** 🌀
+**Ready to go fast? Build with Ply.** 🌀
 Give it a ⭐ on GitHub if you like it!
 
 ---

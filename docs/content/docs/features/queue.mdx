@@ -1,11 +1,11 @@
 ---
 title: Queue
-description: Background job system with memory and persistent file modes in TurboGo.
+description: Background job system with memory and persistent file modes in Ply.
 ---
 
 # Configure Queue
 
-TurboGo includes a built-in background job system for running asynchronous tasks with support for in-memory and persistent file storage.
+Ply includes a built-in background job system for running asynchronous tasks with support for in-memory and persistent file storage.
 
 ---
 
@@ -14,14 +14,14 @@ TurboGo includes a built-in background job system for running asynchronous tasks
 Initialize the queue system in your `main.go`:
 
 ```go
-app := TurboGo.New().WithQueue()
+app := ply.New().WithQueue()
 controller.Quehandler(app.EngineCtx)
 ```
 
 > ✅ You can also chain this with other modules:
 >
 > ```go
-> app := TurboGo.New().WithCache().WithPubsub().WithQueue()
+> app := ply.New().WithCache().WithPubsub().WithQueue()
 > ```
 
 ---
@@ -62,13 +62,13 @@ When using:
 c.MustQueue().EnqueueAll("user:welcome-email", payload)
 ```
 
-TurboGo will enqueue the job to **both** memory and storage (combined mode).
+Ply will enqueue the job to **both** memory and storage (combined mode).
 
 ---
 
 ###  Registering Workers
 
-TurboGo allows flexible worker registration depending on delivery mode:
+Ply allows flexible worker registration depending on delivery mode:
 
 ```go
 // Memory worker only
@@ -107,7 +107,7 @@ func Quehandler(ctx *core.EngineContext) {
 
 ##  Configuration Modes
 
-TurboGo Queue supports 3 modes:
+Ply Queue supports 3 modes:
 
 - **Memory Only**: Temporary, best for speed in dev/test.
 - **File Storage Only**: Ensures durability across restarts.
@@ -117,7 +117,7 @@ TurboGo Queue supports 3 modes:
 
 ##  Behind the Scenes
 
-TurboGo Queue uses a dual-layer system:
+Ply Queue uses a dual-layer system:
 
 - **Memory**: Fast, buffered in-RAM processing
 - **Storage**: Durable JSON logs for crash recovery
@@ -129,7 +129,7 @@ Automatic cleanup runs every 10 minutes, removing jobs older than 24 hours.
 
 ##  Auto Cleanup
 
-TurboGo automatically cleans up old queue files:
+Ply automatically cleans up old queue files:
 
 - **Interval**: every `10 * time.Minute`
 - **Retention**: deletes jobs older than `24 * time.Hour`

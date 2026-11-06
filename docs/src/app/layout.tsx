@@ -20,12 +20,12 @@ export default function Layout({ children }: { children: ReactNode }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              name: "TurboGo",
+              name: "Ply",
               applicationCategory: "DeveloperApplication",
               operatingSystem: "Cross-platform",
               description:
                 "A blazing fast Go framework for building high-performance web applications and APIs",
-              url: "https://turbogo.web.id",
+              url: "https://ply.dev",
               author: {
                 "@type": "Person",
                 name: "Dziqha",
@@ -50,14 +50,14 @@ export default function Layout({ children }: { children: ReactNode }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "TurboGo",
-              url: "https://turbogo.web.id",
-              logo: "https://turbogo.web.id/images/cyclone.png",
-              sameAs: ["https://twitter.com/turbogo_dev"],
+              name: "Ply",
+              url: "https://ply.dev",
+              logo: "https://ply.dev/images/icon.png",
+              sameAs: ["https://twitter.com/ply_dev"],
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "Developer Support",
-                url: "https://turbogo.web.id",
+                url: "https://ply.dev",
               },
             }),
           }}
@@ -69,11 +69,11 @@ export default function Layout({ children }: { children: ReactNode }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "TurboGo Documentation",
-              url: "https://turbogo.web.id",
+              name: "Ply Documentation",
+              url: "https://ply.dev",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://turbogo.web.id/search?q={search_term_string}",
+                target: "https://ply.dev/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),

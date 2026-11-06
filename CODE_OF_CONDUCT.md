@@ -1,4 +1,4 @@
-# Code of Conduct - TurboGo
+# Code of Conduct - Ply
 
 ## Our Pledge
 

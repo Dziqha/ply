@@ -10,7 +10,7 @@ export default function HomePage() {
             <div className="flex justify-center mb-8">
               <Image
                 src="/images/icon.png"
-                alt="TurboGo"
+                alt="Ply"
                 width={140}
                 height={140}
                 priority
@@ -19,7 +19,7 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-5xl md:text-6xl font-medium text-neutral-900 dark:text-neutral-100 mb-6">
-              TurboGo
+              Ply
             </h1>
 
             <p className="text-base text-neutral-600 dark:text-neutral-400 mb-10">
@@ -46,7 +46,7 @@ export default function HomePage() {
 
         <section className="mx-auto max-w-3xl mb-24">
           <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed text-center">
-            TurboGo is a modern backend framework designed for engineers who
+            Ply is a modern backend framework designed for engineers who
             value performance, simplicity, and full control. Built on{" "}
             <span className="font-medium text-neutral-900 dark:text-neutral-100">
               Tiered Zero-Copy Routing (TZCR)

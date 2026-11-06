@@ -1,11 +1,11 @@
 ---
 title: Context
-description: The request context system used in TurboGo handlers.
+description: The request context system used in Ply handlers.
 ---
 
 # Configure Context
 
-TurboGo provides a powerful `Context` object that is passed into every request handler.  
+Ply provides a powerful `Context` object that is passed into every request handler.  
 It wraps the low-level HTTP context and offers helpful utilities for building clean, modular APIs.
 
 ---
@@ -90,12 +90,12 @@ key := "my-key"
 		}
 
 		fmt.Println("🔄 Cache MISS:", key)
-		result := "Hello, TurboGo!"
+		result := "Hello, Ply!"
 		ctx.Cache.Memory.Set(key, []byte(result), 10*time.Second)
 		ctx.Text(200, "Generated: "+result)
 ```
 - Use `c.Cache.Set()` and `c.Cache.Get()` to  inject them
-- To activate the caching system, initialize TurboGo with `.WithCache()`
+- To activate the caching system, initialize Ply with `.WithCache()`
 ---
 
 ##  Concurrency Utilities

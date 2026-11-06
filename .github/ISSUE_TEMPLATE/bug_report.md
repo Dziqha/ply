@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug to help us improve TurboGo
+about: Report a bug to help us improve Ply
 title: ''
 labels: bug
 assignees: ''
@@ -30,7 +30,7 @@ What actually happened.
 
 - OS: [e.g. Windows 11, Ubuntu 22.04]
 - Go version: [e.g. 1.26.0]
-- TurboGo version/commit: [e.g. v0.1.0 or commit hash]
+- Ply version/commit: [e.g. v0.1.0 or commit hash]
 
 ## Additional Context
 

@@ -2,7 +2,7 @@ export function printBanner() {
   console.log(`
 ╔═════════════════════════════════════╗
 ║                                     ║
-║     🚀 TurboGo Project Generator    ║
+║     🚀 Ply Project Generator    ║
 ║                                     ║
 ╚═════════════════════════════════════╝
 `);

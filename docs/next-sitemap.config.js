@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://turbogo.web.id",
+  siteUrl: "https://ply.dev",
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   exclude: ["/api/*", "/admin/*"],
@@ -15,6 +15,6 @@ module.exports = {
         allow: "/",
       },
     ],
-    additionalSitemaps: ["https://turbogo.web.id/sitemap.xml"],
+    additionalSitemaps: ["https://ply.dev/sitemap.xml"],
   },
 };

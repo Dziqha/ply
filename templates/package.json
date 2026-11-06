@@ -1,9 +1,9 @@
 {
-  "name": "create-turbogo",
-  "version": "1.1.0",
+  "name": "create-ply",
+  "version": "1.0.0",
   "main": "index.js",
   "bin": {
-    "create-turbogo": "./bin/index.js"
+    "create-ply": "./bin/index.js"
   },
   "directories": {
     "lib": "lib"
@@ -13,7 +13,7 @@
     "cli",
     "golang",
     "generator",
-    "turbogo"
+    "ply"
   ],
   "author": "Dziqha",
   "license": "MIT",

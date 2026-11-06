@@ -1,11 +1,11 @@
 ---
 title: Cache
-description: Built-in manual caching system with TTL support in TurboGo.
+description: Built-in manual caching system with TTL support in Ply.
 ---
 
 #  Configure Manual Cache
 
-TurboGo provides a lightweight **manual caching system** that allows you to store responses or computed values in memory with a custom TTL (time-to-live) per request context.
+Ply provides a lightweight **manual caching system** that allows you to store responses or computed values in memory with a custom TTL (time-to-live) per request context.
 
 > ✅ Default route-level automatic caching is **no longer used**. You now have **full control** via `ctx.Cache.Memory`.
 
@@ -13,16 +13,16 @@ TurboGo provides a lightweight **manual caching system** that allows you to stor
 
 ##  Enable Cache
 
-To activate the caching system, initialize TurboGo with `.WithCache()`:
+To activate the caching system, initialize Ply with `.WithCache()`:
 
 ```go
-app := TurboGo.New().WithCache()
+app := ply.New().WithCache()
 ```
 
 > ✅ You can also chain it with other modules:
 >
 > ```go
-> app := TurboGo.New().WithCache().WithQueue().WithPubsub()
+> app := ply.New().WithCache().WithQueue().WithPubsub()
 > ```
 
 
@@ -34,7 +34,7 @@ This sets up a safe, in-memory TTL cache that can be used inside any handler.
 
 ```go
 func main() {
-	app := TurboGo.New().WithCache()
+	app := ply.New().WithCache()
 
 	app.Get("/", func(ctx *core.Context) {
 		key := "my-key"
@@ -46,7 +46,7 @@ func main() {
 		}
 
 		fmt.Println("🔄 Cache MISS:", key)
-		result := "Hello, TurboGo!"
+		result := "Hello, Ply!"
 		ctx.Cache.Memory.Set(key, []byte(result), 10*time.Second)
 		ctx.Text(200, "Generated: "+result)
 	})

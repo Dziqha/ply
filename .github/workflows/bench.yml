@@ -8,7 +8,7 @@ on:
       - 'app.go'
       - 'core/**'
       - 'internal/router/**'
-      - 'bench/turbogo/**'
+      - 'bench/ply/**'
       - 'bench/tfb/**'
       - 'bench/**'
       - '.github/workflows/bench.yml'
@@ -54,17 +54,17 @@ jobs:
       - name: Install wrk
         run: sudo apt-get update -qq && sudo apt-get install -y -qq wrk
       - name: Seed DB
-        run: psql "host=localhost user=postgres password=postgres dbname=hello_world sslmode=disable" -f bench/turbogo/seed.sql
+        run: psql "host=localhost user=postgres password=postgres dbname=hello_world sslmode=disable" -f bench/ply/seed.sql
         env:
           PGPASSWORD: postgres
-      - name: Build turbogo + fiber comparator
+      - name: Build ply + fiber comparator
         working-directory: bench
         run: |
-          go build -o "$RUNNER_TEMP/turbogo" ./turbogo
+          go build -o "$RUNNER_TEMP/ply" ./ply
           go build -o "$RUNNER_TEMP/fiber" ./tfb/fiber-main.go || echo "fiber comparator optional"
       - name: Quick wrk (5s, c64, no full matrix)
         run: |
-          DATABASE_URL="host=localhost user=postgres password=postgres dbname=hello_world sslmode=disable" PORT=8080 "$RUNNER_TEMP/turbogo" >"$RUNNER_TEMP/turbogo.log" 2>&1 &
+          DATABASE_URL="host=localhost user=postgres password=postgres dbname=hello_world sslmode=disable" PORT=8080 "$RUNNER_TEMP/ply" >"$RUNNER_TEMP/ply.log" 2>&1 &
           for i in $(seq 1 50); do curl -sf http://127.0.0.1:8080/plaintext >/dev/null 2>&1 && break; sleep 0.2; done
           for ep in plaintext json user/42 db "queries?queries=20" fortunes "update?queries=20"; do
             echo "== /$ep =="
@@ -85,5 +85,5 @@ jobs:
       - name: Validate TFB files
         run: |
           python3 -c "import json; json.load(open('bench/tfb/benchmark_config.json')); print('benchmark_config.json OK')"
-          docker build -f bench/tfb/Dockerfile -t turbogo-tfb-check .
+          docker build -f bench/tfb/Dockerfile -t ply-tfb-check .
           echo "Dockerfile builds OK"

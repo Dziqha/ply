@@ -27,7 +27,7 @@ export const baseOptions: BaseLayoutProps = {
           height={50}
           className="inline-block mr-[-0.5rem]"
         />
-        TurboGo
+        Ply
       </>
     ),
   },

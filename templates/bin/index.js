@@ -15,18 +15,18 @@ const { version } = require("../package.json");
 const program = new Command();
 
 program
-  .name("create-turbogo")
+  .name("create-ply")
   .usage("[project-name]")
   .version(version, "-v, --version", "Show CLI version")
   .helpOption("-h, --help", "Display help information")
   .description(
-    "Scaffold a Golang project using the TurboGo Framework with Feature-Based Architecture"
+    "Scaffold a Golang project using the Ply Framework with Feature-Based Architecture"
   )
   .argument("[project-name]", "Project name")
   .action(async (projectName) => {
     printBanner();
     console.log(
-      chalk.blue.bold("🚀 Welcome to the TurboGo Project Generator!")
+      chalk.blue.bold("🚀 Welcome to the Ply Project Generator!")
     );
     console.log(
       chalk.gray("   Using Feature-Based Architecture for better scalability\n")
@@ -38,7 +38,7 @@ program
           type: "input",
           name: "projectName",
           message: "Project name:",
-          default: "my-turbogo-app",
+          default: "my-ply-app",
           validate: (input) =>
             /^[a-zA-Z0-9-_]+$/.test(input) || "Project name is invalid",
         },
@@ -187,7 +187,7 @@ program
 
       console.log(
         chalk.green(
-          "\n✨ Happy coding with TurboGo Feature-Based Architecture! 🚀"
+          "\n✨ Happy coding with Ply Feature-Based Architecture! 🚀"
         )
       );
 
@@ -207,9 +207,9 @@ program
 
 program
   .command("add-feature")
-  .description("Add a new feature to existing TurboGo project")
+  .description("Add a new feature to existing Ply project")
   .action(async () => {
-    console.log(chalk.blue.bold("\n➕ Add New Feature to TurboGo Project\n"));
+    console.log(chalk.blue.bold("\n➕ Add New Feature to Ply Project\n"));
 
     const { featureName } = await inquirer.prompt([
       {
@@ -225,9 +225,9 @@ program
     const featuresDir = path.join(process.cwd(), "features");
 
     if (!(await fs.pathExists(featuresDir))) {
-      console.log(chalk.red("❌ This doesn't appear to be a TurboGo project."));
+      console.log(chalk.red("❌ This doesn't appear to be a Ply project."));
       console.log(
-        chalk.gray("   Run this command from the root of your TurboGo project.")
+        chalk.gray("   Run this command from the root of your Ply project.")
       );
       process.exit(1);
     }
@@ -290,7 +290,7 @@ program
             );
           } else {
             updatedMainGo = updatedMainGo.replace(
-              /("github\.com\/Dziqha\/TurboGo")/,
+              /("github\.com\/Dziqha\/ply")/,
               `$1\n${importLine}`
             );
           }
@@ -310,8 +310,8 @@ program
           );
         } else {
           updatedMainGo = updatedMainGo.replace(
-            /app := TurboGo\.New\(\)/,
-            `app := TurboGo.New()\n\t\n\t// Register feature routes\n${registerLine}`
+            /app := ply\.New\(\)/,
+            `app := ply.New()\n\t\n\t// Register feature routes\n${registerLine}`
           );
         }
       }

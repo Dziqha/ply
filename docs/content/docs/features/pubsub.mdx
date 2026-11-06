@@ -1,11 +1,11 @@
 ---
 title: Pubsub
-description: Lightweight publish/subscribe system for in-memory event messaging in TurboGo.
+description: Lightweight publish/subscribe system for in-memory event messaging in Ply.
 ---
 
 # Configure Pubsub
 
-TurboGo includes an in-memory publish/subscribe (pubsub) system for event-driven communication between components.
+Ply includes an in-memory publish/subscribe (pubsub) system for event-driven communication between components.
 
 ---
 
@@ -14,14 +14,14 @@ TurboGo includes an in-memory publish/subscribe (pubsub) system for event-driven
 Pubsub is initialized in `main.go` via:
 
 ```go
-app := TurboGo.New().WithPubsub()
+app := ply.New().WithPubsub()
 go controller.PubsubHandler(app.EngineCtx)
 ```
 
 > ✅ You can also chain it with other modules:
 >
 > ```go
-> app := TurboGo.New().WithCache().WithQueue().WithPubsub()
+> app := ply.New().WithCache().WithQueue().WithPubsub()
 > ```
 
 ---
@@ -95,7 +95,7 @@ func PubsubHandler(ps *core.EngineContext) {
 
 ## Behind the Scenes
 
-TurboGo Pubsub supports two delivery layers:
+Ply Pubsub supports two delivery layers:
 
 - **Memory**: Real-time broadcast via channels
 - **Storage**: Persistent logs for reliable delivery

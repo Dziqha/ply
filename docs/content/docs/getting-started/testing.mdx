@@ -11,7 +11,7 @@ and no server started.
 
 ```go
 func TestHello(t *testing.T) {
-	app := TurboGo.New()
+	app := ply.New()
 	app.Get("/hello/:name", func(c *core.Context) {
 		c.Text(200, "hello "+c.Param("name"))
 	})

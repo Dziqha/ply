@@ -1,4 +1,4 @@
-APP_NAME=TurboGo
+APP_NAME=ply
 PKG_PATH=./test
 CPU_PROF=cpu.prof
 MEM_PROF=mem.prof

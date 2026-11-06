@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest an idea for TurboGo
+about: Suggest an idea for Ply
 title: ''
 labels: enhancement
 assignees: ''

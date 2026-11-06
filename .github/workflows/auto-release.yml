@@ -1,4 +1,4 @@
-name: TurboGo Release
+name: Ply Release
 
 on:
   workflow_dispatch:
@@ -42,16 +42,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "$VERSION" -m "TurboGo $VERSION"
+          git tag -a "$VERSION" -m "Ply $VERSION"
           git push origin "$VERSION"
           gh release create "$VERSION" \
-            --title "TurboGo $VERSION" \
+            --title "Ply $VERSION" \
             --generate-notes
 
       - name: Notify Telegram
         if: env.TELEGRAM_TOKEN != ''
         run: |
-          TEXT="TurboGo ${VERSION} released: https://github.com/${GITHUB_REPOSITORY}/releases/tag/${VERSION}"
+          TEXT="Ply ${VERSION} released: https://github.com/${GITHUB_REPOSITORY}/releases/tag/${VERSION}"
           curl -sf -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             -d text="$TEXT" >/dev/null
