@@ -1,9 +1,9 @@
 <!-- omit in toc -->
 # Contributing to Ply
 
-First off, thanks for taking the time to contribute! ❤️
+Thanks for taking the time to contribute.
 
-All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The community looks forward to your contributions. 🎉
+All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. 
 
 > And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
 > - Star the project
@@ -142,10 +142,10 @@ To get started with your first contribution:
    ```bash
    git clone https://github.com/Dziqha/ply.git
    cd Ply
-3. **Set up Go >= 1.21** and install dependencies (if needed)
+3. **Set up Go 1.26 or newer** and install dependencies (if needed)
 
 4. **Open the project** in your favorite IDE (VS Code, GoLand, etc.)
-5. **Follow our coding** standards and open a Pull Request 🚀
+5. **Follow our coding standards** and open a pull request.
 
 ### Improving The Documentation
 We love documentation improvements! You can contribute by:
@@ -197,10 +197,10 @@ If you consistently contribute and engage in development or documentation, we’
 
 How to join:
 
-- Contribute to at least 2–3 PRs or more
+- Contribute to at least 2 or 3 PRs
 
 - Help review or test PRs from others
 
 - Share feedback or ideas via Issues/Discussions
 
-- Be kind, constructive, and collaborative 🤝
+- Be kind, constructive and collaborative

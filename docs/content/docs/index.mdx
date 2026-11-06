@@ -1,48 +1,44 @@
 ---
 title: Welcome
-description: Welcome to the Ply documentation!
+description: An introduction to the Ply documentation
 ---
 
-#  Welcome to Ply
+# Welcome to Ply
 
-Ply is a modern, high-performance web framework for Go, designed with modularity, developer experience, and blazing-fast routing at its core.
+Ply is a web framework for Go built on fasthttp. It provides routing,
+middleware, request contexts and built-in queue, pub/sub and cache
+engines, with a small core and no external runtime dependencies.
 
-Whether you're building REST APIs, background workers, or full-blown web services, Ply provides:
+The documentation covers the following areas:
 
 - Middleware-first routing with handler chaining
-- Built-in queue system and pub/sub
+- Queue and pub/sub engines
 - Context-based dependency injection
-- Simple in-memory and file-based caching
-- Minimal and flexible core for full control
+- In-memory and file-based caching
+- Deployment and testing
 
----
+## What Ply provides
 
-##  What is Ply?
+Ply keeps routing and application logic separate. Handlers are chained,
+contexts are pooled, and feature modules can be registered independently.
+The framework ships the components most services need, so a project can
+start with one dependency instead of a stack of plugins.
 
-🌀 **Ply** is a lightweight, middleware-first framework for building fast and scalable backend applications in Go.
+## Routing model
 
-Unlike traditional Go frameworks that tightly couple logic and routing, Ply gives you full control over execution flow using chained handlers, custom contexts, and built-in systems for queues and messaging — all designed to reduce boilerplate and improve modularity.
+Ply uses Tiered Zero-Copy Routing (TZCR). Routes are grouped into static,
+parametric and wildcard tiers, then compiled into a switch-based table
+with a radix fallback. Matching is allocation-free on the hot path, and
+the compiled table falls back to the radix tree for route shapes it cannot
+represent.
 
-🔀 Ply Routing Philosophy
-Ply introduces a custom Tiered Zero-Copy Routing (TZCR) model powered by a compiled-switch router with a radix fallback. This design prioritizes speed by avoiding unnecessary allocations and resolving routes in a tiered fashion:
-
-- Static, parametric, and wildcard routes are handled in separate tiers for minimal lookup time.
-
-- Middleware and handlers are precompiled and chained efficiently with zero-copy context passing.
-
-This approach results in ultra-fast response times, even under high concurrency, making Ply ideal for performance-critical APIs and microservices.
-
-
-
----
-
-##  Explore the Docs
+## Explore the docs
 
 <Cards>
   <Card title="Getting Started" href="/docs/getting-started/install" />
   <Card title="Project Structure" href="/docs/getting-started/structure" />
   <Card title="Testing" href="/docs/getting-started/testing" />
-  <Card title="Routing & Middleware" href="/docs/routing/basic" />
+  <Card title="Routing" href="/docs/routing/basic" />
   <Card title="Dependency Injection" href="/docs/dependency-injection/context" />
   <Card title="Queue System" href="/docs/features/queue" />
   <Card title="Pub/Sub System" href="/docs/features/pubsub" />

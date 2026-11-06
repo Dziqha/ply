@@ -21,11 +21,19 @@ export const baseOptions: BaseLayoutProps = {
           <circle cx={12} cy={12} r={12} fill="currentColor" />
         </svg> */}
         <Image
-          src="/images/icon.png"
+          src="/images/ply-brand/png/ply-mark-1024.png"
           alt="Logo"
           width={50}
           height={50}
-          className="inline-block mr-[-0.5rem]"
+          className="inline-block mr-[-0.5rem] dark:hidden"
+        />
+
+        <Image
+          src="/images/ply-brand/png/ply-mark-dark-1024.png"
+          alt="Logo"
+          width={50}
+          height={50}
+          className="mr-[-0.5rem] hidden dark:inline-block"
         />
         Ply
       </>

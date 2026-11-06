@@ -1,36 +1,35 @@
 ---
 title: CLI
-description: Generate projects and scaffolding using the Ply CLI.
+description: Generate projects and scaffolding with the Ply CLI.
 ---
 
-#  Ply CLI
+# Ply CLI
 
-Ply provides a simple, flexible command-line interface (CLI) to generate starter projects and scaffolding instantly — powered by **Node.js**, not Golang binary.
+Ply provides a command-line interface (CLI) for generating starter
+projects. The CLI is implemented in Node.js and is separate from the Go
+module.
 
----
+## Why Node.js
 
-##  Why Node.js CLI?
+The CLI uses `commander`, `inquirer` and `chalk` to provide:
 
-Unlike Go-based CLIs, Ply CLI is implemented in **Node.js** using tools like `commander`, `inquirer`, and `chalk` for:
+- Interactive prompts for project options
+- Support on Windows, macOS and Linux
+- Fast iteration on the generator itself
+- Access to established CLI tooling
 
-- Better interactive prompts
-- Cross-platform support (Windows/macOS/Linux)
-- Easier development and fast iteration
-- Ecosystem advantage (rich CLI UI tools)
-
-> ⚠️ We intentionally use Node.js to overcome limitations of Go's CLI tooling, especially for rich interactive workflows.
-
----
+> Node.js is required only for the CLI. Generated Ply applications do not
+> depend on Node.js at runtime.
 
 ## Installation
 
-No need to install anything globally. Just run:
+No global install is required:
 
 ```bash
 npx create-ply@latest my-app
-````
+```
 
-This will generate the default Ply project structure:
+The command generates the following project structure:
 
 ```bash
 my-app/
@@ -45,47 +44,25 @@ my-app/
 └── README.md
 ```
 
----
+## Feature-based architecture
 
-## Benefits of Feature-Based Architecture:
+- **Modular.** Each feature is independent and self-contained.
+- **Scalable.** New features can be added without changing existing ones.
+- **Maintainable.** Code is organized by feature rather than by layer.
+- **Testable.** Each layer within a feature can be tested independently.
 
-* ✅ Modular: Each feature is independent and self-contained
+## Use cases
 
-* ✅ Scalable: Easy to add new features without changing existing structure
+- Starting a new Ply project
+- Scaffolding repetitive project structure
+- Keeping architecture consistent across a team
 
-* ✅ Maintainable: Code is easier to locate, understand, and modify by feature
-
-* ✅ Testable: Each layer can be tested independently
-
----
-
-##  Use Cases
-
-* Kickstart new Ply projects in seconds
-* Save time scaffolding repetitive structure
-* Ensure consistent architecture across teams
-
----
-
-##  Example Command
+## After generation
 
 ```bash
-npx create-ply@latest myapp
-```
-
-Follow the prompt and your project will be scaffolded automatically.
-
----
-
-## Pro Tip
-
-After generation:
-
-```bash
-cd bisa
+cd myapp
 go mod tidy
-Configure your .env file
 go run .
 ```
 
-Start coding your next backend with the speed of Ply! 🌀
+Then edit `.env` to set the database connection and secret values.

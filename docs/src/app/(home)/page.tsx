@@ -9,12 +9,20 @@ export default function HomePage() {
           <div className="mx-auto max-w-2xl text-center">
             <div className="flex justify-center mb-8">
               <Image
-                src="/images/icon.png"
+                src="/images/ply-brand/png/ply-mascot-dark-1024.png"
                 alt="Ply"
                 width={140}
                 height={140}
                 priority
-                className="max-w-[128px]"
+                className="max-w-[128px] dark:hidden"
+              />
+              <Image
+                src="/images/ply-brand/png/ply-mascot-1024.png"
+                alt="Ply"
+                width={140}
+                height={140}
+                priority
+                className="max-w-[128px] hidden dark:block"
               />
             </div>
 

@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               applicationCategory: "DeveloperApplication",
               operatingSystem: "Cross-platform",
               description:
-                "A blazing fast Go framework for building high-performance web applications and APIs",
+                "A fast Go framework for building web applications and APIs",
               url: "https://ply.dev",
               author: {
                 "@type": "Person",

@@ -5,9 +5,9 @@ description: Test handlers without opening a network listener.
 
 # Testing
 
-`app.Test` runs a request through the full application — router, middleware,
-recovery, bindings — and returns the recorded response, with no port opened
-and no server started.
+`app.Test` runs a request through the full application, including the
+router, middleware, recovery and bindings, and returns the recorded
+response without opening a port or starting a server.
 
 ```go
 func TestHello(t *testing.T) {
@@ -48,8 +48,8 @@ json.NewDecoder(resp.Body).Decode(&out)
 
 ## Notes
 
-- The request body is passed through `req.Body`; `req.Host` and `req.Header`
-  are honored.
+- The request body is passed through `req.Body`. `req.Host` and
+  `req.Header` are honored.
 - The response body is buffered, so it stays readable after `Test` returns.
 - The returned `http.Response` uses `http.NoBody` when the response is empty.
 - Calling `Test` repeatedly is cheap: the handler is built once and reused.
@@ -59,7 +59,7 @@ json.NewDecoder(resp.Body).Decode(&out)
   parallel tests.
 
 > `app.Test` lives in the main package and uses `net/http` types, so it adds
-> about 57 KB to the binary (no new modules — `net/http` is already in the
-> graph through fasthttp's static file handler). It adds no allocations and
-> no work to the request path; apps that never call it are unaffected at
-> runtime.
+> about 57 KB to the binary. No new modules are added, because `net/http`
+> is already in the graph through the fasthttp static file handler. It adds
+> no allocations and no work to the request path. Applications that never
+> call it are unaffected at runtime.

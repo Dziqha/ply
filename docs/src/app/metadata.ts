@@ -6,7 +6,7 @@ export const defaultMetadata: Metadata = {
     template: "%s | Ply Docs",
   },
   description:
-    "Official documentation for Ply – a blazing fast Go framework for building high-performance web applications and APIs.",
+    "Documentation for Ply, a fast and lightweight Go web framework built on fasthttp.",
   keywords: [
     "Golang",
     "Ply",
@@ -52,7 +52,7 @@ export const defaultMetadata: Metadata = {
   openGraph: {
     title: "Ply Documentation",
     description:
-      "Official documentation for Ply – a blazing fast Go framework for building high-performance web applications and APIs.",
+      "Documentation for Ply, a fast and lightweight Go web framework built on fasthttp.",
     url: "https://ply.dev/docs",
     siteName: "Ply Docs",
     images: [
@@ -60,7 +60,7 @@ export const defaultMetadata: Metadata = {
         url: "/images/og-ply.png",
         width: 1200,
         height: 630,
-        alt: "Ply Framework - Blazing Fast Go Framework",
+        alt: "Ply Go web framework logo",
       },
     ],
     locale: "en_US",
@@ -72,7 +72,7 @@ export const defaultMetadata: Metadata = {
     card: "summary_large_image",
     title: "Ply Documentation",
     description:
-      "Official documentation for Ply – a blazing fast Go framework for building high-performance web applications and APIs.",
+      "Documentation for Ply, a fast and lightweight Go web framework built on fasthttp.",
     site: "@Dziqha",
     creator: "@Dziqha",
     images: ["/images/og-ply.png"],

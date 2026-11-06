@@ -6,17 +6,17 @@ description: Introduction to route definitions in Ply.
 # Configure Routing
 
 Ply provides a flexible and high-performance routing system inspired by popular Go frameworks.
-At its core, Ply uses a custom **Tiered Zero-Copy Routing (TZCR)** engine that separates **static**, **parametric**, and **wildcard** routes into different tiers for ultra-fast resolution.
+At its core, Ply uses a **Tiered Zero-Copy Routing (TZCR)** engine that separates **static**, **parametric** and **wildcard** routes into different tiers for fast resolution.
 
-Unlike traditional routers, Ply precompiles handler chains, passes context using a **zero-copy** strategy, and avoids unnecessary allocations — all designed to optimize for concurrency and minimal latency.
+Ply precompiles handler chains, passes context with a **zero-copy** strategy and avoids unnecessary allocations. The design targets concurrency and minimal latency.
 
-> 🧪 In internal benchmarks, Ply consistently outperforms popular frameworks like Gin and Fiber in routing-heavy workloads.
+> On routing-heavy workloads, internal benchmarks place Ply ahead of Gin and Fiber.
 
 
 
 ---
 
-##  Basic Example
+## Basic example
 
 ```go
 app := ply.New()
@@ -28,7 +28,7 @@ app.Get("/hello", func(c *core.Context) {
 
 ---
 
-##  Route Structure
+## Route structure
 
 Ply uses clear method-based route definitions:
 
@@ -77,11 +77,11 @@ Params are delivered through inline slots on the pooled request context
 (8 slots, no map on the hot path), which cut param lookup from ~66ns to
 ~46ns and wildcard from ~71ns to ~38ns in the same-session A/B. Paths
 that overflow the slots, or routes resolved by the tree fallback, use a
-map instead — results are identical, only the fast case is
+map instead. Results are identical, and only the fast case is
 allocation-free.
 
 Routes registered after startup mark the table dirty and it rebuilds
-lazily on the next lookup — no restart or manual step needed.
+lazily on the next lookup. No restart or manual step is needed.
 
 ## Path parsing
 
@@ -89,11 +89,11 @@ fasthttp parses the request URI and normalizes the path (percent-decoding,
 duplicate slashes, `/./`, `/../`) on the first `ctx.Path()` call, which
 dominates handler CPU for simple routes. Ply checks the raw request
 target first and uses it directly when normalization provably cannot
-change it (no `%`, `\`, `//`, `/./`, `/..`, control bytes; query and
-fragment trimmed), falling back to `ctx.Path()` otherwise. Routing input
+change it (no `%`, `\`, `//`, `/./`, `/..` or control bytes, with the query
+and fragment trimmed), falling back to `ctx.Path()` otherwise. Routing input
 is byte-identical either way: a 50k-target differential test asserts the
 fast path always matches the parser.
 
 Measured on the same machine (`go test -bench`, 0 allocs/op):
-`ctx.Path()` 105ns vs the guarded fast path 14ns — roughly 91ns less CPU
-per request, with no change in matching behavior.
+`ctx.Path()` takes 105 ns, compared with 14 ns for the guarded fast path,
+roughly 91 ns less CPU per request with no change in matching behavior.

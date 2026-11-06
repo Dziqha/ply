@@ -15,9 +15,9 @@ honest summary is:
 
 - throughput at fasthttp parity: within 3% of fasthttp and within 2% of
   Fiber v2/v3 in the thread-matched run, and in the same band at
-  oversubscribed concurrency;
+  oversubscribed concurrency.
 - the thinnest framework layer we measured: in-process, Ply is within 4%
-  of a bare path-plus-switch handler and ~37% cheaper than Fiber;
+  of a bare path-plus-switch handler and about 37% cheaper than Fiber.
 - features that other frameworks expect you to assemble from plugins.
 
 ## Architecture
@@ -76,15 +76,15 @@ invisible.
 
 ## When to choose what
 
-- **Ply** — you want fasthttp-level performance without dropping to raw
+- **Ply**: you want fasthttp-level performance without dropping to raw
   fasthttp, plus built-in queue, pub/sub and cache engines, zero-allocation
   params and an in-process test helper.
-- **Fiber** — you want the largest ecosystem and community around a
+- **Fiber**: you want the largest ecosystem and community around a
   fasthttp-based framework.
-- **Gin / Echo / Chi** — you want the standard `net/http` ecosystem
+- **Gin / Echo / Chi**: you want the standard `net/http` ecosystem
   (`http.Handler` interop, `httptest`, third-party middleware) more than raw
   throughput.
-- **Raw fasthttp** — you want the maximum possible throughput and are happy
+- **Raw fasthttp**: you want the maximum possible throughput and are happy
   to write routing and context plumbing yourself.
 
 If you need `net/http` middleware compatibility, none of the fasthttp-based

@@ -18,7 +18,7 @@ app := ply.New().WithQueue()
 controller.Quehandler(app.EngineCtx)
 ```
 
-> ✅ You can also chain this with other modules:
+> You can also chain this with other modules:
 >
 > ```go
 > app := ply.New().WithCache().WithPubsub().WithQueue()
@@ -28,15 +28,15 @@ controller.Quehandler(app.EngineCtx)
 
 ## How It Works
 
-* Jobs are pushed using Enqueue(topic, data) to be processed later.
+* Jobs are pushed with `Enqueue(topic, data)` and processed later.
 * Each queue is identified by a topic string.
 * Workers process jobs from either memory, storage, or both.
 
 ---
 
-##  Example Usage
+## Example usage
 
-###  Enqueue to Memory (Fast, volatile)
+### Enqueue to memory (fast, volatile)
 
 ```go
 if err := c.MustQueue().Memory.Enqueue("user:welcome-email", payload); err != nil {
@@ -45,7 +45,7 @@ if err := c.MustQueue().Memory.Enqueue("user:welcome-email", payload); err != ni
 }
 ```
 
-###  Enqueue to Storage (Durable, file-based)
+### Enqueue to storage (durable, file-based)
 
 ```go
 if err := c.MustQueue().Storage.Enqueue("user:welcome-email", payload); err != nil {
@@ -54,7 +54,7 @@ if err := c.MustQueue().Storage.Enqueue("user:welcome-email", payload); err != n
 }
 ```
 
-###  Default Behavior
+### Default behavior
 
 When using:
 
@@ -66,7 +66,7 @@ Ply will enqueue the job to **both** memory and storage (combined mode).
 
 ---
 
-###  Registering Workers
+### Registering workers
 
 Ply allows flexible worker registration depending on delivery mode:
 
@@ -90,7 +90,7 @@ func SendWelcomeEmailWorker(data []byte) error {
 	if err := json.Unmarshal(data, &input); err != nil {
 		return fmt.Errorf("invalid payload: %w", err)
 	}
-	fmt.Printf("👷 Queue Worker: %s <%s>\n", input.Name, input.Email)
+	fmt.Printf("Queue worker: %s <%s>\n", input.Name, input.Email)
 	return nil
 }
 
@@ -105,29 +105,29 @@ func Quehandler(ctx *core.EngineContext) {
 
 ---
 
-##  Configuration Modes
+## Configuration modes
 
-Ply Queue supports 3 modes:
+Ply Queue supports three modes:
 
 - **Memory Only**: Temporary, best for speed in dev/test.
 - **File Storage Only**: Ensures durability across restarts.
-- **Combined** *(default)*: Uses both for speed + safety.
+- **Combined** *(default)*: uses both for speed and durability.
 
 ---
 
-##  Behind the Scenes
+## Behind the scenes
 
 Ply Queue uses a dual-layer system:
 
 - **Memory**: Fast, buffered in-RAM processing
 - **Storage**: Durable JSON logs for crash recovery
 
-Jobs can be enqueued to either or both layers.  
+Jobs can be enqueued to either or both layers.
 Automatic cleanup runs every 10 minutes, removing jobs older than 24 hours.
 
 ---
 
-##  Auto Cleanup
+## Auto cleanup
 
 Ply automatically cleans up old queue files:
 

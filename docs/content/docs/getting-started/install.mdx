@@ -1,68 +1,55 @@
 ---
 title: Installation
-description: How to install Ply locally or for production
+description: Install Ply from the module proxy or scaffold a project
 ---
 
-#  Installation
+# Installation
 
-You can install Ply easily using the CLI or manually from source.  
-Choose the method that works best for your workflow.
+Ply can be added to an existing Go module or scaffolded with the CLI.
 
----
+## System requirements
 
-##  System Requirements
+| Component  | Minimum version          |
+|------------|--------------------------|
+| Go         | `1.26`                   |
+| Git        | `2.30` or newer          |
+| OS         | Linux, macOS, Windows    |
+| RAM        | 512 MB for CLI usage     |
+| Terminal   | Bash, Zsh or PowerShell  |
 
-Make sure your system meets the following requirements:
+> Go 1.26 or newer is required. fasthttp v1.77 sets the module's `go`
+> directive to `1.26.0`.
 
-| Component     | Minimum Version        |
-|---------------|------------------------|
-| Go Runtime    | `1.26`                 |
-| Git           | `2.30` or higher       |
-| OS            | Linux, macOS, Windows  |
-| RAM           | 512MB+ (CLI usage)     |
-| Terminal      | Bash / Zsh / Powershell |
-
-> ⚠️ Go 1.26+ is required: fasthttp v1.77 raises the module's `go` directive to 1.26.0.
-
----
-
-##  Install via CLI
-
-The recommended way to get started is with the Ply CLI:
+## Install with the CLI
 
 ```bash
 npx create-ply@latest my-app
 ```
 
-> ➡️ Learn more in the [CLI Reference](/docs/reference/cli)
+See the [CLI reference](/docs/reference/cli) for details.
 
----
-
-##  Manual Installation
-
-Prefer manual setup? No problem.
+## Manual installation
 
 <div className='fd-steps [&_h3]:fd-step'>
-### Create a New Project Folder
+### Create a project directory
 ```bash
 mkdir my-project
 ```
-### Navigate to the Project Folder
+### Enter the directory
 ```bash
 cd my-project
 ```
-### Initialize Go Module
+### Initialize the Go module
 ```bash
 go mod init github.com/yourusername/my-project
 ```
-> Replace github.com/yourusername/my-project with your actual module path.
-### Install Ply Package
+> Replace `github.com/yourusername/my-project` with your module path.
+### Install Ply
 ```bash
 go get github.com/Dziqha/ply
 ```
 ### Create main.go
-```bash
-// main.go
+```go
 package main
 
 import (
@@ -74,16 +61,16 @@ func main() {
 	app := ply.New()
 
 	app.Get("/", func(c *core.Context) {
-		c.Text(200, "Hello from Ply!")
+		c.Text(200, "Hello from Ply")
 	})
 
 	app.RunServer(":8080")
 }
 ```
-### Run Your App
+### Run the application
 ```bash
 go run main.go
 ```
-> Your Ply app will be available at http://localhost:8080
+> The server listens on http://localhost:8080.
 
 </div>

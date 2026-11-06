@@ -18,7 +18,7 @@ app := ply.New().WithPubsub()
 go controller.PubsubHandler(app.EngineCtx)
 ```
 
-> ✅ You can also chain it with other modules:
+> You can also chain it with other modules:
 >
 > ```go
 > app := ply.New().WithCache().WithQueue().WithPubsub()
@@ -36,7 +36,7 @@ go controller.PubsubHandler(app.EngineCtx)
 
 ---
 
-##  Example Usage
+## Example usage
 
 ### Publish an event:
 
@@ -75,7 +75,7 @@ func OnUserCreated(data []byte) error {
 	if err := json.Unmarshal(data, &input); err != nil {
 		return fmt.Errorf("invalid pubsub data: %w", err)
 	}
-	fmt.Printf("📣 PubSub Event: %s <%s>\n", input.Name, input.Email)
+	fmt.Printf("PubSub event: %s <%s>\n", input.Name, input.Email)
 	return nil
 }
 ```
@@ -85,7 +85,7 @@ func PubsubHandler(ps *core.EngineContext) {
 	ch := ps.Pubsub.SubscribeAll("user.created")
 	for msg := range ch {
 		if err := OnUserCreated(msg); err != nil {
-			fmt.Println("❌ pubsub handler error:", err)
+			fmt.Println("pubsub handler error:", err)
 		}
 	}
 }
@@ -95,25 +95,25 @@ func PubsubHandler(ps *core.EngineContext) {
 
 ## Behind the Scenes
 
-Ply Pubsub supports two delivery layers:
+Ply pub/sub supports two delivery layers:
 
 - **Memory**: Real-time broadcast via channels
 - **Storage**: Persistent logs for reliable delivery
 
-Messages can be published to either or both.  
+Messages can be published to either or both.
 Old messages are auto-deleted every 10 minutes if older than 24 hours.
 
 ---
 
-##  Configuration Modes
+## Configuration modes
 
-- **Memory Only** – Real-time and fast
-- **Storage Only** – Durable and replayable
-- **Memory + Storage** *(default)* – Combines both
+- **Memory Only**: real-time and fast
+- **Storage Only**: durable and replayable
+- **Memory + Storage** *(default)*: combines both
 
 ---
 
-##  Auto Cleanup
+## Auto cleanup
 
 Stored messages are cleaned up automatically:
 
@@ -124,7 +124,7 @@ Stored messages are cleaned up automatically:
 
 ---
 
-##  Use Cases
+## Use cases
 
 - Real-time internal event broadcasting
 - Triggering follow-up processes (e.g. welcome email after registration)

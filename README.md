@@ -21,7 +21,7 @@
 **Key features**
 
 - Middleware-first via `.Use()`
-- Ultra-fast router & context engine
+- Fast router and context engine
 - Built-in async engines (PubSub, Queue, Cache)
 - Extensible and clean internal architecture
 - Optional middleware: Auth, Logger, Recovery
