@@ -24,7 +24,9 @@
 - Fast router and context engine
 - Built-in async engines (PubSub, Queue, Cache)
 - Extensible and clean internal architecture
-- Optional middleware: Auth, Logger, Recovery
+- Optional middleware: Auth, Logger, Recovery, Security Headers, Body Limit,
+  Health Checks, Structured Logging, ETag and Metrics
+- Cookie-backed sessions with a pluggable store
 - Test helpers: `app.Test(req)` runs requests in-process, no port needed
 - CLI generator: `npx create-ply` for project scaffolding
 
@@ -50,6 +52,36 @@ Set the secret before starting the server:
 ```bash
 export JWT_SECRET=supersecurekey123
 ```
+
+---
+
+## Production middleware
+
+Ply includes the HTTP middleware most services need without extra
+dependencies:
+
+```go
+logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+metrics := middleware.NewMetrics()
+
+app.Use(
+	middleware.RequestID(),
+	middleware.SecurityHeaders(),
+	middleware.BodyLimit(1 << 20),
+	middleware.SlogLogger(logger),
+	metrics.Middleware(),
+)
+
+app.Get("/healthz", middleware.Health())
+app.Get("/metrics", metrics.Handler())
+```
+
+`middleware.ETag()` and `middleware.CacheControl()` handle response validators
+and cache directives. The `session` package provides cookie-backed sessions
+with a pluggable store.
+
+See the [middleware docs](docs/content/docs/middleware) for configuration and
+ordering details.
 
 ---
 

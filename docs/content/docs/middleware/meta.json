@@ -9,6 +9,12 @@
     "compress",
     "requestid",
     "timeout",
-    "basicauth"
+    "basicauth",
+    "security-headers",
+    "body-limit",
+    "health",
+    "slog",
+    "etag",
+    "metrics"
   ]
 }
