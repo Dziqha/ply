@@ -288,7 +288,7 @@ func (r *SingleThreadedRouter) find(method, path string, params map[string]strin
 }
 
 // findIntoCompiled mirrors findCompiled with slot sinks: the decision
-// search fills stack offsets, and only the winner is materialized —
+// search fills stack offsets, and only the winner is materialized -
 // directly into dst, never through a map.
 func (r *SingleThreadedRouter) findIntoCompiled(method string, mi int, path string, dst *[core.MaxSlots]core.ParamSlot, overflow map[string]string) (core.Handler, *Route, int) {
 	if r.dirty {

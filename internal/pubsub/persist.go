@@ -202,7 +202,7 @@ func (peb *PersistentEventBus) Compact() error {
 	peb.file, err = os.OpenFile(peb.logFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	peb.writeMutex.Unlock()
 
-	fmt.Printf("🧹 Pubsub compact done: %d messages kept\n", len(messages))
+	fmt.Printf("Pubsub compact done: %d messages kept\n", len(messages))
 
 	return err
 }
@@ -214,7 +214,7 @@ func (peb *PersistentEventBus) AutoCompact(interval time.Duration) {
 
 		for range ticker.C {
 			if err := peb.Compact(); err != nil {
-				fmt.Println("❌ Pubsub compact error:", err)
+				fmt.Println("Pubsub compact error:", err)
 			}
 		}
 	}()

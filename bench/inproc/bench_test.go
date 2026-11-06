@@ -2,7 +2,7 @@
 //
 // Every case is called as a fasthttp.RequestHandler with a reused
 // RequestCtx, so the number is "what the framework adds on top of
-// fasthttp's parser/writer" — the layer a wrk run cannot isolate (under
+// fasthttp's parser/writer". the layer a wrk run cannot isolate (under
 // load, syscall time dominates and router cost disappears in noise).
 package inproc
 

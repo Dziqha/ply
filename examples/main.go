@@ -20,12 +20,12 @@ func main() {
 		key := "my-key"
 		val, found := ctx.Cache.Memory.Get(key)
 		if found {
-			fmt.Println("✅ Cache HIT:", key)
+			fmt.Println("Cache HIT:", key)
 			ctx.Text(200, "From Cache: "+string(val))
 			return
 		}
 
-		fmt.Println("🔄 Cache MISS:", key)
+		fmt.Println("Cache MISS:", key)
 		result := "Hello, Ply!"
 		ctx.Cache.Memory.Set(key, []byte(result), 10*time.Second)
 		ctx.Text(200, "Generated: "+result)

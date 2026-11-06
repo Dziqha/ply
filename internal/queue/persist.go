@@ -256,7 +256,7 @@ func (ptq *PersistentTaskQueue) Cleanup(olderThan time.Duration) error {
 		return err
 	}
 
-	fmt.Printf("🧹 Queue auto-cleanup done: %d tasks removed (older than %v)\n", deleted, olderThan)
+	fmt.Printf("Queue auto-cleanup done: %d tasks removed (older than %v)\n", deleted, olderThan)
 	return nil
 }
 
@@ -312,7 +312,7 @@ func (ptq *PersistentTaskQueue) AutoCleanup(interval time.Duration, olderThan ti
 
 		for range ticker.C {
 			if err := ptq.Cleanup(olderThan); err != nil {
-				fmt.Println("❌ Queue auto-cleanup error:", err)
+				fmt.Println("Queue auto-cleanup error:", err)
 			}
 		}
 	}()

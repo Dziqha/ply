@@ -26,7 +26,7 @@ program
   .action(async (projectName) => {
     printBanner();
     console.log(
-      chalk.blue.bold("🚀 Welcome to the Ply Project Generator!")
+      chalk.blue.bold("Welcome to the Ply Project Generator!")
     );
     console.log(
       chalk.gray("   Using Feature-Based Architecture for better scalability\n")
@@ -48,7 +48,7 @@ program
 
     const projectPath = path.join(process.cwd(), projectName);
     if (await fs.pathExists(projectPath)) {
-      console.log(chalk.red(`❌ Folder "${projectName}" already exists!`));
+      console.log(chalk.red(`Folder "${projectName}" already exists!`));
       process.exit(1);
     }
 
@@ -133,14 +133,14 @@ program
     };
 
     const spinner = ora(
-      "📦 Generating project with feature-based architecture..."
+      "Generating project with feature-based architecture..."
     ).start();
 
     try {
       await generateProject(projectName, projectPath, config);
-      spinner.succeed(chalk.green("✅ Project created successfully!\n"));
+      spinner.succeed(chalk.green("Project created successfully!\n"));
 
-      console.log(chalk.blue.bold("📁 Project Structure:"));
+      console.log(chalk.blue.bold("Project Structure:"));
       console.log(chalk.gray(`${projectName}/`));
       console.log(chalk.gray(`├── features/`));
       config.features.forEach((feature, index) => {
@@ -163,7 +163,7 @@ program
       console.log(chalk.gray(`├── .gitignore`));
       console.log(chalk.gray(`└── README.md\n`));
 
-      console.log(chalk.blue.bold("🎯 Next Steps:"));
+      console.log(chalk.blue.bold("Next Steps:"));
       console.log(chalk.cyan(`  1. cd ${projectName}`));
       console.log(chalk.cyan(`  2. go mod tidy`));
       console.log(chalk.cyan(`  3. Configure your .env file`));
@@ -174,7 +174,7 @@ program
         console.log(chalk.cyan(`  4. go run .`));
       }
 
-      console.log(chalk.yellow("\n💡 Tips:"));
+      console.log(chalk.yellow("\nTips:"));
       console.log(
         chalk.gray("  • Each feature is self-contained in its own folder")
       );
@@ -187,19 +187,19 @@ program
 
       console.log(
         chalk.green(
-          "\n✨ Happy coding with Ply Feature-Based Architecture! 🚀"
+          "\nHappy coding with Ply Feature-Based Architecture! "
         )
       );
 
       if (config.features.length > 1) {
         console.log(
           chalk.blue(
-            `\n📦 Generated ${config.features.length} features: ${config.features.join(", ")}`
+            `\nGenerated ${config.features.length} features: ${config.features.join(", ")}`
           )
         );
       }
     } catch (error) {
-      spinner.fail(chalk.red("❌ Failed to generate project"));
+      spinner.fail(chalk.red("Failed to generate project"));
       console.error(error);
       process.exit(1);
     }
@@ -209,7 +209,7 @@ program
   .command("add-feature")
   .description("Add a new feature to existing Ply project")
   .action(async () => {
-    console.log(chalk.blue.bold("\n➕ Add New Feature to Ply Project\n"));
+    console.log(chalk.blue.bold("\nAdd New Feature to Ply Project\n"));
 
     const { featureName } = await inquirer.prompt([
       {
@@ -225,7 +225,7 @@ program
     const featuresDir = path.join(process.cwd(), "features");
 
     if (!(await fs.pathExists(featuresDir))) {
-      console.log(chalk.red("❌ This doesn't appear to be a Ply project."));
+      console.log(chalk.red("This doesn't appear to be a Ply project."));
       console.log(
         chalk.gray("   Run this command from the root of your Ply project.")
       );
@@ -235,13 +235,13 @@ program
     const featureDir = path.join(featuresDir, featureName.toLowerCase());
 
     if (await fs.pathExists(featureDir)) {
-      console.log(chalk.red(`❌ Feature "${featureName}" already exists!`));
+      console.log(chalk.red(`Feature "${featureName}" already exists!`));
       process.exit(1);
     }
 
     const mainGoPath = path.join(process.cwd(), "main.go");
     if (!(await fs.pathExists(mainGoPath))) {
-      console.log(chalk.red("❌ Cannot find main.go in current directory."));
+      console.log(chalk.red("Cannot find main.go in current directory."));
       process.exit(1);
     }
 
@@ -251,7 +251,7 @@ program
     );
 
     if (!projectNameMatch) {
-      console.log(chalk.red("❌ Cannot detect project name from main.go"));
+      console.log(chalk.red("Cannot detect project name from main.go"));
       process.exit(1);
     }
 
@@ -324,30 +324,30 @@ program
       }
 
       spinner.succeed(
-        chalk.green(`✅ Feature "${featureName}" created successfully!\n`)
+        chalk.green(`Feature "${featureName}" created successfully!\n`)
       );
 
-      console.log(chalk.blue.bold("📁 Generated Files:"));
+      console.log(chalk.blue.bold("Generated Files:"));
       console.log(chalk.gray(`features/${featureLower}/`));
       console.log(chalk.gray(`├── handler.go`));
       console.log(chalk.gray(`├── service.go`));
       console.log(chalk.gray(`├── repository.go`));
       console.log(chalk.gray(`└── router.go`));
 
-      console.log(chalk.green("\n✅ Updated:"));
+      console.log(chalk.green("\nUpdated:"));
       console.log(chalk.gray(`main.go (added import and route registration)`));
       console.log(
         chalk.gray(`README.md (added project structure and API endpoints)`)
       );
 
-      console.log(chalk.blue.bold("\n🔗 Available Endpoints:"));
+      console.log(chalk.blue.bold("\nAvailable Endpoints:"));
       console.log(chalk.cyan(`GET    /api/${featureLower}`));
       console.log(chalk.cyan(`POST   /api/${featureLower}`));
       console.log(chalk.cyan(`GET    /api/${featureLower}/:id`));
       console.log(chalk.cyan(`PUT    /api/${featureLower}/:id`));
       console.log(chalk.cyan(`DELETE /api/${featureLower}/:id`));
 
-      console.log(chalk.yellow("\n💡 Next Steps:"));
+      console.log(chalk.yellow("\nNext Steps:"));
       console.log(
         chalk.gray(
           `  1. Implement business logic in features/${featureLower}/service.go`
@@ -365,7 +365,7 @@ program
       );
       console.log(chalk.gray(`  4. Run: go run .`));
     } catch (error) {
-      spinner.fail(chalk.red("❌ Failed to create feature"));
+      spinner.fail(chalk.red("Failed to create feature"));
       console.error(error);
       process.exit(1);
     }

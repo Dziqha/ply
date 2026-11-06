@@ -41,16 +41,8 @@ func CenterText(text string) string {
 }
 
 func Banner(addr string) string {
-	return `
- _____            _             ___      
-/__   \_   _ _ __| |__   ___   / _ \___  
-  / /\/ | | | '__| '_ \ / _ \ / /_\/ _ \ 
- / /  | |_| | |  | |_) | (_) / /_\\ (_) |
- \/    \__,_|_|  |_.__/ \___/\____/\___/ 
-                                         
-` +
-		CenterText("🌀 Ply Ultra High-Performance Web Framework") + "\n" +
-		CenterText(fmt.Sprintf("⚡ Listening on: http://localhost%s", addr)) + "\n"
+	return CenterText("Ply: one ply over fasthttp") + "\n" +
+		CenterText(fmt.Sprintf("Listening on http://localhost%s", addr)) + "\n"
 }
 
 type App struct {

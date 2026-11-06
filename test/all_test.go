@@ -491,7 +491,7 @@ func BenchmarkTaskQueue_WithDelay(b *testing.B) {
 
 	max := b.N
 	if max > 10000 {
-		max = 10000 // ✅ aman, tidak assign ke b.N
+		max = 10000 // aman, tidak assign ke b.N
 	}
 
 	done := make(chan bool, max)

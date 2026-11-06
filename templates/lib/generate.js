@@ -421,7 +421,7 @@ function generateReadme(project, config) {
     const dbType = config.database.type;
     dbSection = `
 
-## 🗄️ Database Setup (${dbType})
+## Database Setup (${dbType})
 
 `;
 
@@ -506,7 +506,7 @@ Configure your MongoDB connection in \`.env\` file.
   } else {
     dbSection = `
 
-## 💡 No Database Configuration
+## No Database Configuration
 
 Project ini di-generate **tanpa konfigurasi database**. Anda bisa:
 
@@ -534,11 +534,11 @@ go get go.mongodb.org/mongo-driver/mongo
 
   const features = config.features || [config.name];
 
-  return `# 🚀 ${project}
+  return `# ${project}
 
 Generated with [Ply CLI](https://github.com/Dziqha/ply)
 
-## 📁 Feature-Based Architecture
+## Feature-Based Architecture
 
 Struktur project ini menggunakan **feature-based architecture** dimana setiap feature memiliki komponen lengkap:
 
@@ -560,15 +560,15 @@ ${features
 └── README.md
 \`\`\`
 
-## 🎯 Keuntungan Feature-Based:
+## Keuntungan Feature-Based:
 
-- ✅ **Modular**: Setiap feature independen dan self-contained
-- ✅ **Scalable**: Mudah menambah feature baru tanpa mengubah struktur lain
-- ✅ **Maintainable**: Mudah menemukan dan mengubah kode berdasarkan feature
-- ✅ **Testable**: Setiap layer dapat di-test secara terpisah
-- ✅ **Team-Friendly**: Multiple developers dapat bekerja pada feature berbeda tanpa konflik
+- **Modular**: Setiap feature independen dan self-contained
+- **Scalable**: Mudah menambah feature baru tanpa mengubah struktur lain
+- **Maintainable**: Mudah menemukan dan mengubah kode berdasarkan feature
+- **Testable**: Setiap layer dapat di-test secara terpisah
+- **Team-Friendly**: Multiple developers dapat bekerja pada feature berbeda tanpa konflik
 ${dbSection}
-## 🚦 Cara Menjalankan:
+## Cara Menjalankan:
 
 \`\`\`bash
 # Install dependencies
@@ -583,7 +583,7 @@ go build -o bin/app
 
 Server akan berjalan di: \`http://localhost:8080\`
 
-## 📝 Menambah Feature Baru:
+## Menambah Feature Baru:
 
 ### Manual:
 1. Buat folder baru di \`features/[nama-feature]\`
@@ -595,7 +595,7 @@ Server akan berjalan di: \`http://localhost:8080\`
 create-ply add-feature
 \`\`\`
 
-## 🔗 API Endpoints:
+## API Endpoints:
 
 ${features
   .map(
@@ -608,23 +608,23 @@ ${features
   )
   .join("\n\n")}
 
-## 🏗️ Architecture Layers:
+## Architecture Layers:
 
 1. **Handler Layer**: Menangani HTTP requests dan responses
 2. **Service Layer**: Business logic dan validasi
 3. **Repository Layer**: Akses database dan data persistence
 
-## 📚 Resources:
+## Resources:
 
 - [Ply Documentation](https://github.com/Dziqha/ply)
 - [Go Documentation](https://golang.org/doc/)
 ${config.database ? `- [${config.database.type} Documentation](${getDbDocUrl(config.database.type)})` : ""}
 
-## 🤝 Contributing:
+## Contributing:
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License:
+## License:
 
 This project is licensed under the MIT License.
 `;
@@ -699,9 +699,9 @@ export async function updateReadmeWithFeature(readmePath, featureName) {
 
   if (readmeContent.includes(`### ${featureName} Feature`)) {
     console.log(`Feature ${featureName} endpoints already exists in README`);
-  } else if (readmeContent.includes("## 🔗 API Endpoints:")) {
+  } else if (readmeContent.includes("## API Endpoints:")) {
     readmeContent = readmeContent.replace(
-      /(## 🔗 API Endpoints:\n\n)/,
+      /(## API Endpoints:\n\n)/,
       `$1${newEndpointsSection}\n\n`
     );
   }

@@ -14,7 +14,7 @@ type TaskQueue struct {
 	queues               map[string]chan []byte
 	workers              map[string][]context.CancelFunc
 	closed               bool
-	AllowMultipleWorkers bool // ✅ optional: true = banyak worker per queue
+	AllowMultipleWorkers bool // optional: true = banyak worker per queue
 }
 
 func NewInMem() *TaskQueue {
@@ -42,7 +42,7 @@ func (q *TaskQueue) Enqueue(queue string, task []byte) error {
 		q.mu.Lock()
 		ch, ok = q.queues[queue]
 		if !ok {
-			ch = make(chan []byte, 10000) // ✅ buffer besar agar tidak deadlock
+			ch = make(chan []byte, 10000) // buffer besar agar tidak deadlock
 			q.queues[queue] = ch
 		}
 		q.mu.Unlock()
@@ -79,7 +79,7 @@ func (q *TaskQueue) RegisterWorker(queue string, handler func([]byte) error) err
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
-	q.workers[queue] = append(q.workers[queue], cancel) // ✅ now supports multiple workers if allowed
+	q.workers[queue] = append(q.workers[queue], cancel) // now supports multiple workers if allowed
 
 	go func() {
 		for {

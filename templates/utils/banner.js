@@ -2,7 +2,7 @@ export function printBanner() {
   console.log(`
 ╔═════════════════════════════════════╗
 ║                                     ║
-║     🚀 Ply Project Generator    ║
+║        Ply Project Generator        ║
 ║                                     ║
 ╚═════════════════════════════════════╝
 `);

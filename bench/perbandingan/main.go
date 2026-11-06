@@ -21,7 +21,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// 🔥 OPTIMIZED CONFIGURATION
+// OPTIMIZED CONFIGURATION
 var (
 	testDuration      = 10 * time.Second
 	warmupDuration    = 2 * time.Second
@@ -103,7 +103,7 @@ func (ls *LatencyStats) Calculate() (min, max, avg, p50, p90, p95 time.Duration)
 	return
 }
 
-// 🚀 IMPROVED HTTP CLIENT - NO RATE LIMITING
+// IMPROVED HTTP CLIENT - NO RATE LIMITING
 func createOptimizedClient(concurrency int) *http.Client {
 	return &http.Client{
 		Timeout: 30 * time.Second, // Increased timeout
@@ -121,7 +121,7 @@ func createOptimizedClient(concurrency int) *http.Client {
 	}
 }
 
-// 🔥 FIXED BENCHMARK FUNCTION - NO ARTIFICIAL RATE LIMITING
+// FIXED BENCHMARK FUNCTION - NO ARTIFICIAL RATE LIMITING
 func benchmarkFramework(framework string, port int, concurrency int, duration time.Duration) *ConcurrencyResult {
 	var (
 		totalRequests   int64
@@ -237,7 +237,7 @@ func benchmarkFramework(framework string, port int, concurrency int, duration ti
 	}
 }
 
-// 🏠 SERVER SETUPS WITH BETTER ERROR HANDLING
+// SERVER SETUPS WITH BETTER ERROR HANDLING
 func setupRobustFiber(port int) *fiber.App {
 	app := fiber.New(fiber.Config{
 		DisableStartupMessage: true,
@@ -408,15 +408,15 @@ func getMemoryUsage() int64 {
 	return int64(m.Alloc)
 }
 
-// 📊 ROBUST BENCHMARK RUNNER
+// ROBUST BENCHMARK RUNNER
 func runRobustBenchmark(framework string, port int) *BenchmarkResult {
-	fmt.Printf("🔥 Benchmarking %s...\n", framework)
+	fmt.Printf("Benchmarking %s...\n", framework)
 
 	// Health check with retries
 	client := createOptimizedClient(1)
 	testURL := fmt.Sprintf("http://localhost:%d/", port)
 
-	fmt.Printf("  🏥 Health check...\n")
+	fmt.Printf("  Health check...\n")
 	var healthOK bool
 	for i := 0; i < 10; i++ {
 		resp, err := client.Get(testURL)
@@ -435,7 +435,7 @@ func runRobustBenchmark(framework string, port int) *BenchmarkResult {
 	}
 
 	if !healthOK {
-		fmt.Printf("  ❌ Health check failed for %s\n", framework)
+		fmt.Printf("  Health check failed for %s\n", framework)
 		return &BenchmarkResult{
 			Framework:        framework,
 			ConcurrencyTests: make(map[int]*ConcurrencyResult),
@@ -459,17 +459,17 @@ func runRobustBenchmark(framework string, port int) *BenchmarkResult {
 	validTests := 0
 
 	for _, concurrency := range concurrencyLevels {
-		fmt.Printf("  📊 Testing concurrency: %d\n", concurrency)
+		fmt.Printf("  Testing concurrency: %d\n", concurrency)
 
 		if concurrency > 10 {
-			fmt.Printf("    💤 Brief pause...\n")
+			fmt.Printf("    Brief pause...\n")
 			time.Sleep(1 * time.Second)
 		}
 
 		concResult := benchmarkFramework(framework, port, concurrency, testDuration)
 		result.ConcurrencyTests[concurrency] = concResult
 
-		fmt.Printf("    ✅ RPS: %.1f, Latency: %v, Errors: %.1f%%\n",
+		fmt.Printf("    RPS: %.1f, Latency: %v, Errors: %.1f%%\n",
 			concResult.RequestsPerSec,
 			concResult.AvgLatency.Round(time.Microsecond),
 			concResult.ErrorRate)
@@ -507,7 +507,7 @@ func runRobustBenchmark(framework string, port int) *BenchmarkResult {
 		result.P95Latency = bestResult.P95Latency
 	}
 
-	fmt.Printf("  ✅ %s completed!\n\n", framework)
+	fmt.Printf("  %s completed!\n\n", framework)
 
 	runtime.GC()
 	time.Sleep(500 * time.Millisecond)
@@ -515,9 +515,9 @@ func runRobustBenchmark(framework string, port int) *BenchmarkResult {
 	return result
 }
 
-// 📋 ENHANCED RESULTS DISPLAY
+// ENHANCED RESULTS DISPLAY
 func printEnhancedResults(results []*BenchmarkResult) {
-	fmt.Println("\n🏆 GO FRAMEWORK BENCHMARK RESULTS")
+	fmt.Println("\nGO FRAMEWORK BENCHMARK RESULTS")
 	fmt.Println("=" + strings.Repeat("=", 50))
 
 	// Filter valid results
@@ -529,7 +529,7 @@ func printEnhancedResults(results []*BenchmarkResult) {
 	}
 
 	if len(validResults) == 0 {
-		fmt.Println("❌ No valid results to display")
+		fmt.Println("No valid results to display")
 		return
 	}
 
@@ -538,14 +538,14 @@ func printEnhancedResults(results []*BenchmarkResult) {
 		return validResults[i].RequestsPerSec > validResults[j].RequestsPerSec
 	})
 
-	fmt.Println("\n📈 OVERALL PERFORMANCE RANKING:")
+	fmt.Println("\nOVERALL PERFORMANCE RANKING:")
 	for i, result := range validResults {
 		fmt.Printf("%d. %-10s - %7.1f req/sec (latency: %v)\n",
 			i+1, result.Framework, result.RequestsPerSec,
 			result.AvgLatency.Round(time.Microsecond))
 	}
 
-	fmt.Println("\n📊 DETAILED METRICS:")
+	fmt.Println("\nDETAILED METRICS:")
 	fmt.Printf("%-10s %-12s %-15s %-15s %-12s\n",
 		"Framework", "RPS", "Avg Latency", "P95 Latency", "Memory (KB)")
 	fmt.Println(strings.Repeat("-", 70))
@@ -561,7 +561,7 @@ func printEnhancedResults(results []*BenchmarkResult) {
 	}
 
 	// Concurrency breakdown
-	fmt.Println("\n🔥 CONCURRENCY PERFORMANCE:")
+	fmt.Println("\nCONCURRENCY PERFORMANCE:")
 	for _, concurrency := range concurrencyLevels {
 		fmt.Printf("\n--- Concurrency: %d ---\n", concurrency)
 
@@ -589,21 +589,21 @@ func printEnhancedResults(results []*BenchmarkResult) {
 
 	if len(validResults) > 0 {
 		winner := validResults[0]
-		fmt.Printf("\n🥇 WINNER: %s with %.1f req/sec!\n", winner.Framework, winner.RequestsPerSec)
+		fmt.Printf("\nWINNER: %s with %.1f req/sec!\n", winner.Framework, winner.RequestsPerSec)
 	}
 }
 
 func main() {
-	fmt.Println("🚀 GO FRAMEWORK PERFORMANCE BENCHMARK")
+	fmt.Println("GO FRAMEWORK PERFORMANCE BENCHMARK")
 	fmt.Println("Testing: Fiber, Echo, Gin, Ply")
-	fmt.Printf("⚡ Duration: %v, Concurrency: %v\n", testDuration, concurrencyLevels)
-	fmt.Println("🔥 No artificial rate limiting - full speed ahead!")
+	fmt.Printf("Duration: %v, Concurrency: %v\n", testDuration, concurrencyLevels)
+	fmt.Println("No artificial rate limiting - full speed ahead!")
 	fmt.Println(strings.Repeat("=", 50))
 
 	// Use more cores for better performance
 	maxProcs := runtime.NumCPU()
 	runtime.GOMAXPROCS(maxProcs)
-	fmt.Printf("🖥️  Using all %d CPU cores\n\n", maxProcs)
+	fmt.Printf(" Using all %d CPU cores\n\n", maxProcs)
 
 	var results []*BenchmarkResult
 
@@ -620,12 +620,12 @@ func main() {
 
 	for i, fw := range frameworks {
 		if i > 0 {
-			fmt.Printf("😴 System cooldown...\n")
+			fmt.Printf("System cooldown...\n")
 			runtime.GC()
 			time.Sleep(2 * time.Second)
 		}
 
-		fmt.Printf("🚀 Starting %s server on port %d...\n", fw.name, fw.port)
+		fmt.Printf("Starting %s server on port %d...\n", fw.name, fw.port)
 		fw.setup(fw.port)
 		time.Sleep(500 * time.Millisecond)
 
@@ -640,8 +640,8 @@ func main() {
 		data, _ := json.MarshalIndent(results, "", "  ")
 		filename := fmt.Sprintf("benchmark_results_%s.json", time.Now().Format("15-04-05"))
 		os.WriteFile(filename, data, 0644)
-		fmt.Printf("\n💾 Results saved to: %s\n", filename)
+		fmt.Printf("\nResults saved to: %s\n", filename)
 	}
 
-	fmt.Println("\n🎉 Benchmark completed successfully!")
+	fmt.Println("\nBenchmark completed successfully!")
 }

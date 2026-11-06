@@ -245,14 +245,14 @@ func (c *Context) GetSession(key string) any {
 
 func (c *Context) MustPubsub() *pubsub.Engine {
 	if c.Pubsub == nil {
-		panic("🚨 Pubsub engine is not set in Context. Use SetPubsub() before calling this.")
+		panic("Pubsub engine is not set in Context. Use SetPubsub() before calling this.")
 	}
 	return c.Pubsub
 }
 
 func (c *Context) MustQueue() *queue.Engine {
 	if c.Queue == nil {
-		panic("🚨 Queue engine is not set in Context. Use SetQueue() before calling this.")
+		panic("Queue engine is not set in Context. Use SetQueue() before calling this.")
 	}
 	return c.Queue
 }

@@ -60,7 +60,7 @@ func Logger(config ...LoggerConfig) core.Handler {
 
 		var line string
 		if cfg.DisableColors {
-			line = fmt.Sprintf("🌀 Ply [%s] %s %s [%d]\n", timestamp, method, path, status)
+			line = fmt.Sprintf("Ply [%s] %s %s [%d]\n", timestamp, method, path, status)
 		} else {
 			var statusColor *color.Color
 			switch {
@@ -74,7 +74,7 @@ func Logger(config ...LoggerConfig) core.Handler {
 				statusColor = color.New(color.FgRed)
 			}
 
-			line = fmt.Sprintf("🌀 Ply [%s] %s %s [%s]\n",
+			line = fmt.Sprintf("Ply [%s] %s %s [%s]\n",
 				color.New(color.FgBlue).Sprint(timestamp),
 				color.New(color.FgMagenta).Sprint(method),
 				path,

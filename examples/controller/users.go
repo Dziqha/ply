@@ -21,7 +21,7 @@ func CreateUserHandler(c *core.Context) {
 		return
 	}
 
-	// 🔁 Marshal payload ke []byte
+	// Marshal payload ke []byte
 	payload, err := json.Marshal(input)
 	if err != nil {
 		c.JSON(500, map[string]string{"error": "Failed to encode"})
@@ -45,7 +45,7 @@ func SendWelcomeEmailWorker(data []byte) error {
 	if err := json.Unmarshal(data, &input); err != nil {
 		return fmt.Errorf("invalid payload: %w", err)
 	}
-	fmt.Printf("👷 Queue Worker: %s <%s>\n", input.Name, input.Email)
+	fmt.Printf("Queue Worker: %s <%s>\n", input.Name, input.Email)
 	return nil
 }
 
@@ -54,7 +54,7 @@ func OnUserCreated(data []byte) error {
 	if err := json.Unmarshal(data, &input); err != nil {
 		return fmt.Errorf("invalid pubsub data: %w", err)
 	}
-	fmt.Printf("📣 PubSub Event: %s <%s>\n", input.Name, input.Email)
+	fmt.Printf("PubSub Event: %s <%s>\n", input.Name, input.Email)
 	return nil
 }
 
@@ -69,7 +69,7 @@ func PubsubHandler(ps *core.EngineContext) {
 	ch := ps.Pubsub.SubscribeAll("user.created")
 	for msg := range ch {
 		if err := OnUserCreated(msg); err != nil {
-			fmt.Println("❌ pubsub handler error:", err)
+			fmt.Println("pubsub handler error:", err)
 		}
 	}
 }
