@@ -69,6 +69,67 @@ export default function Layout({ children }: { children: ReactNode }) {
             }),
           }}
         />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "Ply documentation",
+              itemListElement: [
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 1,
+                  name: "Documentation",
+                  url: "https://ply.web.id/docs",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 2,
+                  name: "Getting Started",
+                  url: "https://ply.web.id/docs/getting-started",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 3,
+                  name: "Features",
+                  url: "https://ply.web.id/docs/features",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 4,
+                  name: "Middleware",
+                  url: "https://ply.web.id/docs/middleware",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 5,
+                  name: "Routing",
+                  url: "https://ply.web.id/docs/routing",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 6,
+                  name: "Deployment",
+                  url: "https://ply.web.id/docs/deployment",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 7,
+                  name: "Benchmarks",
+                  url: "https://ply.web.id/docs/benchmarks",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 8,
+                  name: "Comparison",
+                  url: "https://ply.web.id/docs/comparison",
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body className="flex flex-col min-h-screen">
         <RootProvider>{children}</RootProvider>

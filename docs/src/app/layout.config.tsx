@@ -40,5 +40,14 @@ export const baseOptions: BaseLayoutProps = {
     ),
   },
   // see https://fumadocs.dev/docs/ui/navigation/links
-  links: [],
+  links: [
+    { text: 'Documentation', url: '/docs' },
+    { text: 'Features', url: '/docs/features' },
+    { text: 'Benchmarks', url: '/docs/benchmarks' },
+    {
+      text: 'GitHub',
+      url: 'https://github.com/Dziqha/ply',
+      external: true,
+    },
+  ],
 };

@@ -16,6 +16,39 @@ const stats = [
   { label: "Language", value: "Go" },
 ];
 
+const explore = [
+  {
+    title: "Documentation",
+    href: "/docs",
+    description: "The full guide to routes, contexts, middleware, and engines.",
+  },
+  {
+    title: "Getting Started",
+    href: "/docs/getting-started",
+    description: "Install Ply, create a project, and run the first route.",
+  },
+  {
+    title: "Features",
+    href: "/docs/features",
+    description: "HTTP helpers, auth, realtime transports, and runtime engines.",
+  },
+  {
+    title: "Middleware",
+    href: "/docs/middleware",
+    description: "Auth, CORS, CSRF, rate limits, compression, and metrics.",
+  },
+  {
+    title: "Benchmarks",
+    href: "/docs/benchmarks",
+    description: "Reproducible throughput, latency, and overhead measurements.",
+  },
+  {
+    title: "Comparison",
+    href: "/docs/comparison",
+    description: "How Ply compares with Gin, Echo, Fiber, and net/http.",
+  },
+];
+
 const card =
   "rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 md:p-8 transition hover:border-neutral-400 dark:hover:border-neutral-600";
 
@@ -125,6 +158,37 @@ func main() {
               </div>
             ))}
           </dl>
+        </section>
+
+        <section className="mb-24">
+          <div className="mb-10 max-w-xl">
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mb-3">
+              Explore the documentation
+            </h2>
+            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              Start with the guide that matches what you are building.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {explore.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`${card} group block`}
+              >
+                <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  {item.description}
+                </p>
+                <span className="mt-5 inline-block text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                  Open guide
+                </span>
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section className="mb-24">
